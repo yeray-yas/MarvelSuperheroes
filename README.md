@@ -1,8 +1,5 @@
 # MarvelSuperheroes
 
-
-# TMDB MVVM
-
 A simple project using Marvel API based on Kotlin MVVM architecture.
 
 # Screenshots #
