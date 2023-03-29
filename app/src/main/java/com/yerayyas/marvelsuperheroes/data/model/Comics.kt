@@ -1,4 +1,4 @@
-package com.example.superheroesopenbank.data.model
+package com.yerayyas.marvelsuperheroes.data.model
 
 
 import android.os.Parcelable

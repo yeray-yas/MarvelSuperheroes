@@ -1,8 +1,9 @@
-package com.example.superheroesopenbank.data.model
+package com.yerayyas.marvelsuperheroes.data.model
 
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import com.yerayyas.marvelsuperheroes.data.model.Item
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

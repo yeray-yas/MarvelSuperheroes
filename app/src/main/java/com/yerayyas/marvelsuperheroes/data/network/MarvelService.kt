@@ -1,6 +1,6 @@
 package com.yerayyas.marvelsuperheroes.data.network
 
-import com.example.superheroesopenbank.data.model.Marvel
+import com.yerayyas.marvelsuperheroes.data.model.Marvel
 import retrofit2.http.GET
 import retrofit2.http.Query
 
