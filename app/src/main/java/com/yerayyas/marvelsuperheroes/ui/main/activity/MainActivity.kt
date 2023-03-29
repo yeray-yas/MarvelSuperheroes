@@ -1,12 +1,49 @@
 package com.yerayyas.marvelsuperheroes.ui.main.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.yerayyas.marvelsuperheroes.R
+import android.view.View
+import androidx.activity.viewModels
+import com.yerayyas.marvelsuperheroes.data.model.Superhero
+import com.yerayyas.marvelsuperheroes.databinding.ActivityMainBinding
+import com.yerayyas.marvelsuperheroes.ui.detail.activity.DetailActivity
+import com.yerayyas.marvelsuperheroes.ui.main.adapter.SuperheroAdapter
+import com.yerayyas.marvelsuperheroes.ui.main.viewmodel.MainViewModel
+import com.yerayyas.marvelsuperheroes.ui.main.viewmodel.MainViewModelFactory
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val viewModel: MainViewModel by viewModels { MainViewModelFactory() }
+
+        val superheroesAdapter = SuperheroAdapter(emptyList()) { superhero ->
+            navigateTo(superhero)
+
+        }
+
+        binding.recyclerView.adapter = superheroesAdapter
+
+        viewModel.loading.observe(this) { visible ->
+            binding.progress.visibility = if (visible) View.VISIBLE else View.GONE
+        }
+
+        viewModel.superheroes.observe(this) { superheroes ->
+
+            superheroesAdapter.superheroes = superheroes
+            superheroesAdapter.notifyDataSetChanged()
+
+        }
+    }
+
+    private fun navigateTo(superhero: Superhero) {
+        val intent = Intent(this, DetailActivity::class.java)
+        intent.putExtra(DetailActivity.EXTRA_SUPERHERO, superhero)
+        startActivity(intent)
     }
 }
