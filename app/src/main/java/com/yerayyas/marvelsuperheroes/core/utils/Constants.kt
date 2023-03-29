@@ -1,4 +1,4 @@
-package com.yerayyas.marvelsuperheroes.core.utls
+package com.yerayyas.marvelsuperheroes.core.utils
 
 object Constants {
     const val BASE_URL = "https://gateway.marvel.com/v1/public/"
