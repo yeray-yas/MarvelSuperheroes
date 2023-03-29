@@ -25,4 +25,4 @@ A simple project using Marvel API based on Kotlin MVVM architecture.
 
 # Architecture
 
-* [MVVM Architecture](https://developer.android.com/jetpack/guide) (Model -View - ViewModel)
+* [MVVM Architecture](https://developer.android.com/jetpack/guide) (Model - View - ViewModel)
