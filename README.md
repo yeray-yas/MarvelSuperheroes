@@ -19,7 +19,7 @@ A simple project using Marvel API based on Kotlin MVVM architecture.
 * [Retrofit2 & Gson](https://github.com/square/retrofit) - constructing the REST API
 * [RecyclerView](https://developer.android.com/guide/topics/ui/layout/recyclerview) - implementing adapters and viewHolders
 * [Glide](https://github.com/bumptech/glide) - loading images
-* [ViewBinding](https://developer.android.com/topic/libraries/view-binding?hl=es-419)
+* [ViewBinding](https://developer.android.com/topic/libraries/view-binding?hl=es-419) - makes it easier to write code that interacts with views
 
 
 
