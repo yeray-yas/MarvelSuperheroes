@@ -3,7 +3,7 @@
 A simple project using Marvel API based on Kotlin MVVM architecture.
 
 # Screenshots #
-<img src="https://github.com/yeray-yas/MarvelSuperheroes/blob/main/app/src/main/res/drawable/sc_1.png" width="200" height="400" padding="5"/> <img src="https://github.com/yeray-yas/MarvelSuperheroes/blob/main/app/src/main/res/drawable/sc_2.png" width="200" height="400" padding="5"/> 
+<img src="https://github.com/yeray-yas/MarvelSuperheroes/blob/main/app/src/main/res/drawable/msh_1.png" width="200" height="400" padding="5"/> <img src="https://github.com/yeray-yas/MarvelSuperheroes/blob/main/app/src/main/res/drawable/msh_2.png" width="200" height="400" padding="5"/> 
 
 
 # API
