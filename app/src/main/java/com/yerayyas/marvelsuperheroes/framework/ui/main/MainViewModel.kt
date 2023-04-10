@@ -2,9 +2,9 @@ package com.yerayyas.marvelsuperheroes.framework.ui.main.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.*
-import com.yerayyas.marvelsuperheroes.core.utils.Constants.API_KEY
-import com.yerayyas.marvelsuperheroes.core.utils.Constants.HASH
-import com.yerayyas.marvelsuperheroes.core.utils.Constants.TS
+import com.yerayyas.marvelsuperheroes.framework.ui.common.Constants.API_KEY
+import com.yerayyas.marvelsuperheroes.framework.ui.common.Constants.HASH
+import com.yerayyas.marvelsuperheroes.framework.ui.common.Constants.TS
 import com.yerayyas.marvelsuperheroes.data.model.Superhero
 import com.yerayyas.marvelsuperheroes.data.network.SuperheroDbClient
 import kotlinx.coroutines.launch

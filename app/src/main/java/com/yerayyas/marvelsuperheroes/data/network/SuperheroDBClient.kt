@@ -1,6 +1,6 @@
 package com.yerayyas.marvelsuperheroes.data.network
 
-import com.yerayyas.marvelsuperheroes.core.utils.Constants.BASE_URL
+import com.yerayyas.marvelsuperheroes.framework.ui.common.Constants.BASE_URL
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
