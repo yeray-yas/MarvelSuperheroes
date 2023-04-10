@@ -1,5 +1,6 @@
 package com.yerayyas.marvelsuperheroes.framework
 
+import android.app.Application
 import com.yerayyas.marvelsuperheroes.data.dataSources.RemoteDataSource
 import com.yerayyas.marvelsuperheroes.framework.data.dataSources.ServerSuperheroDataSource
 import dagger.Module
@@ -12,7 +13,7 @@ import dagger.hilt.components.SingletonComponent
 class FrameworkModule {
 
     @Provides
-    fun provideRemoteDataSource(): RemoteDataSource {
+    fun provideRemoteDataSource(app: Application): RemoteDataSource {
         return ServerSuperheroDataSource()
     }
 

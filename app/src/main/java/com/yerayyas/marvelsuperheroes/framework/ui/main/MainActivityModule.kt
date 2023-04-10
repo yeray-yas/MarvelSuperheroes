@@ -5,14 +5,13 @@ import com.yerayyas.marvelsuperheroes.usecases.LoadSuperheroesUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.components.ViewModelComponent
 import javax.inject.Singleton
 
 @Module
-@InstallIn(ActivityComponent::class)
+@InstallIn(ViewModelComponent::class)
 class MainActivityModule {
 
-    @Singleton
     @Provides
     fun provideLoadSuperheroesUseCase(repository: SuperheroRepository): LoadSuperheroesUseCase {
         return LoadSuperheroesUseCase(repository)

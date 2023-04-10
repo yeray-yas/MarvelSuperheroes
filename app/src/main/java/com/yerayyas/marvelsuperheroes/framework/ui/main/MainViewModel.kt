@@ -6,14 +6,13 @@ import com.yerayyas.marvelsuperheroes.data.model.Superhero
 import com.yerayyas.marvelsuperheroes.data.repositories.SuperheroRepository
 import com.yerayyas.marvelsuperheroes.framework.data.dataSources.ServerSuperheroDataSource
 import com.yerayyas.marvelsuperheroes.usecases.LoadSuperheroesUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel(private val loadSuperheroesUseCase: LoadSuperheroesUseCase) : ViewModel() {
-
-    private val loadSuperheroesUseCase = LoadSuperheroesUseCase(
-        SuperheroRepository(
-            ServerSuperheroDataSource()
-        ))
+@HiltViewModel
+class MainViewModel @Inject constructor(private val loadSuperheroesUseCase: LoadSuperheroesUseCase) :
+    ViewModel() {
 
     //LIVEDATA
     private val _loading = MutableLiveData(false)
