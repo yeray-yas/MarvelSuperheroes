@@ -8,7 +8,9 @@ import androidx.activity.viewModels
 import com.yerayyas.marvelsuperheroes.data.model.Superhero
 import com.yerayyas.marvelsuperheroes.databinding.ActivityMainBinding
 import com.yerayyas.marvelsuperheroes.framework.ui.detail.DetailActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding

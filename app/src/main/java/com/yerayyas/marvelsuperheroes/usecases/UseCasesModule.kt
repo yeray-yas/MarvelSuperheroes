@@ -9,8 +9,5 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 class UseCasesModule {
-    @Provides
-    fun provideLoadSuperheroesUseCase(repository:SuperheroRepository): LoadSuperheroesUseCase {
-        return LoadSuperheroesUseCase(repository)
-    }
+
 }
