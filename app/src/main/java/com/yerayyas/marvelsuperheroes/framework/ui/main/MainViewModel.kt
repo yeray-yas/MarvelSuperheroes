@@ -8,7 +8,7 @@ import com.yerayyas.marvelsuperheroes.framework.data.dataSources.ServerSuperhero
 import com.yerayyas.marvelsuperheroes.usecases.LoadSuperheroesUseCase
 import kotlinx.coroutines.launch
 
-class MainViewModel : ViewModel() {
+class MainViewModel(private val loadSuperheroesUseCase: LoadSuperheroesUseCase) : ViewModel() {
 
     private val loadSuperheroesUseCase = LoadSuperheroesUseCase(
         SuperheroRepository(
