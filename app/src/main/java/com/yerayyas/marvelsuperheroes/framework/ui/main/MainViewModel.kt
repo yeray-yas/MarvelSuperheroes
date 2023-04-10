@@ -1,12 +1,13 @@
-package com.yerayyas.marvelsuperheroes.framework.ui.main.viewmodel
+package com.yerayyas.marvelsuperheroes.framework.ui.main
 
 import android.util.Log
 import androidx.lifecycle.*
 import com.yerayyas.marvelsuperheroes.data.model.Superhero
+import com.yerayyas.marvelsuperheroes.data.repositories.SuperheroRepository
 import com.yerayyas.marvelsuperheroes.usecases.LoadSuperheroesUseCase
 import kotlinx.coroutines.launch
 
-class MainViewModel : ViewModel() {
+class MainViewModel : ViewModel(SuperheroRepository()) {
 
     private val loadSuperheroesUseCase = LoadSuperheroesUseCase()
 
@@ -16,9 +17,6 @@ class MainViewModel : ViewModel() {
 
     private val _superheroes = MutableLiveData<List<Superhero>>(emptyList())
     val superheroes: LiveData<List<Superhero>> get() = _superheroes
-
-    private val _showMessage = MutableLiveData<String>()
-    val showMessage: LiveData<String> get() = _showMessage
 
     init {
         viewModelScope.launch {

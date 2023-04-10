@@ -8,8 +8,6 @@ import androidx.activity.viewModels
 import com.yerayyas.marvelsuperheroes.data.model.Superhero
 import com.yerayyas.marvelsuperheroes.databinding.ActivityMainBinding
 import com.yerayyas.marvelsuperheroes.framework.ui.detail.DetailActivity
-import com.yerayyas.marvelsuperheroes.framework.ui.main.viewmodel.MainViewModel
-import com.yerayyas.marvelsuperheroes.framework.ui.main.viewmodel.MainViewModelFactory
 
 class MainActivity : AppCompatActivity() {
 
