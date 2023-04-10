@@ -10,7 +10,6 @@ class LoadSuperheroesUseCase(private val repository: SuperheroRepository) {
 
     suspend fun invoke(): List<Superhero> = withContext(Dispatchers.IO) {
 
-
         delay(2000)
         repository.getSuperheroes()
 

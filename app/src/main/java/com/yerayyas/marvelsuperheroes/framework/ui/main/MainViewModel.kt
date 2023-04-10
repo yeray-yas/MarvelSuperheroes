@@ -4,12 +4,16 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.yerayyas.marvelsuperheroes.data.model.Superhero
 import com.yerayyas.marvelsuperheroes.data.repositories.SuperheroRepository
+import com.yerayyas.marvelsuperheroes.framework.data.dataSources.ServerSuperheroDataSource
 import com.yerayyas.marvelsuperheroes.usecases.LoadSuperheroesUseCase
 import kotlinx.coroutines.launch
 
-class MainViewModel : ViewModel(SuperheroRepository()) {
+class MainViewModel : ViewModel() {
 
-    private val loadSuperheroesUseCase = LoadSuperheroesUseCase()
+    private val loadSuperheroesUseCase = LoadSuperheroesUseCase(
+        SuperheroRepository(
+            ServerSuperheroDataSource()
+        ))
 
     //LIVEDATA
     private val _loading = MutableLiveData(false)
