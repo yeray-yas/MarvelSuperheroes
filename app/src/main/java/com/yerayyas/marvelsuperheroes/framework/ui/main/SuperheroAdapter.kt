@@ -1,4 +1,4 @@
-package com.yerayyas.marvelsuperheroes.ui.main.adapter
+package com.yerayyas.marvelsuperheroes.framework.ui.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

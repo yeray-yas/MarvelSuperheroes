@@ -1,4 +1,4 @@
-package com.yerayyas.marvelsuperheroes.ui.main.activity
+package com.yerayyas.marvelsuperheroes.framework.ui.main
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,10 +7,9 @@ import android.view.View
 import androidx.activity.viewModels
 import com.yerayyas.marvelsuperheroes.data.model.Superhero
 import com.yerayyas.marvelsuperheroes.databinding.ActivityMainBinding
-import com.yerayyas.marvelsuperheroes.ui.detail.activity.DetailActivity
-import com.yerayyas.marvelsuperheroes.ui.main.adapter.SuperheroAdapter
-import com.yerayyas.marvelsuperheroes.ui.main.viewmodel.MainViewModel
-import com.yerayyas.marvelsuperheroes.ui.main.viewmodel.MainViewModelFactory
+import com.yerayyas.marvelsuperheroes.framework.ui.detail.DetailActivity
+import com.yerayyas.marvelsuperheroes.framework.ui.main.viewmodel.MainViewModel
+import com.yerayyas.marvelsuperheroes.framework.ui.main.viewmodel.MainViewModelFactory
 
 class MainActivity : AppCompatActivity() {
 

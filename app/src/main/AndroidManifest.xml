@@ -14,11 +14,11 @@
         android:theme="@style/Theme.MarvelSuperheroes"
         tools:targetApi="31">
         <activity
-            android:name=".ui.detail.activity.DetailActivity"
-            android:parentActivityName=".ui.main.activity.MainActivity"
+            android:name=".framework.ui.detail.DetailActivity"
+            android:parentActivityName=".framework.ui.main.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.main.activity.MainActivity"
+            android:name=".framework.ui.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

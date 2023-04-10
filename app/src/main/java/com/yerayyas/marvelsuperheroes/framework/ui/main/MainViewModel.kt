@@ -1,4 +1,4 @@
-package com.yerayyas.marvelsuperheroes.ui.main.viewmodel
+package com.yerayyas.marvelsuperheroes.framework.ui.main.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.*
