@@ -25,18 +25,9 @@ class MainViewModel @Inject constructor(private val loadSuperheroesUseCase: Load
     fun onCreate() {
         viewModelScope.launch {
             _loading.value = true
-            //val currentSuperheroes = service.getCharacters(TS, API_KEY, HASH)
             _superheroes.value = loadSuperheroesUseCase.invoke()
             _loading.value = false
             Log.d("MainActivity", loadSuperheroesUseCase.invoke().size.toString())
         }
     }
 }
-
-/*@Suppress("UNCHECKED_CAST")
-class MainViewModelFactory : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return MainViewModel() as T
-    }
-}*/
-
