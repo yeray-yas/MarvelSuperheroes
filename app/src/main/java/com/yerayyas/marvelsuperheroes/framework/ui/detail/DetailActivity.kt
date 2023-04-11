@@ -1,4 +1,4 @@
-package com.yerayyas.marvelsuperheroes.ui.detail.activity
+package com.yerayyas.marvelsuperheroes.framework.ui.detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
