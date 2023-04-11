@@ -29,6 +29,8 @@ class MainActivity : AppCompatActivity() {
 
         binding.recyclerView.adapter = superheroesAdapter
 
+        viewModel.onCreate()
+
         viewModel.loading.observe(this) { visible ->
             binding.progress.visibility = if (visible) View.VISIBLE else View.GONE
         }

@@ -1,10 +1,11 @@
 package com.yerayyas.marvelsuperheroes.framework.ui.main
 
 import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.yerayyas.marvelsuperheroes.data.model.Superhero
-import com.yerayyas.marvelsuperheroes.data.repositories.SuperheroRepository
-import com.yerayyas.marvelsuperheroes.framework.data.dataSources.ServerSuperheroDataSource
 import com.yerayyas.marvelsuperheroes.usecases.LoadSuperheroesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -21,7 +22,7 @@ class MainViewModel @Inject constructor(private val loadSuperheroesUseCase: Load
     private val _superheroes = MutableLiveData<List<Superhero>>(emptyList())
     val superheroes: LiveData<List<Superhero>> get() = _superheroes
 
-    init {
+    fun onCreate() {
         viewModelScope.launch {
             _loading.value = true
             //val currentSuperheroes = service.getCharacters(TS, API_KEY, HASH)
