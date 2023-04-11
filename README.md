@@ -1,4 +1,4 @@
-# MarvelSuperheroes
+# Marvel Superheroes
 
 A simple project using Marvel API based on Kotlin MVVM architecture.
 
@@ -8,7 +8,7 @@ A simple project using Marvel API based on Kotlin MVVM architecture.
 
 # API
 
-* https://developer.marvel.com/docs​
+* https://developer.marvel.com/docs
 
 
 # Libraries and tools
@@ -20,9 +20,11 @@ A simple project using Marvel API based on Kotlin MVVM architecture.
 * [RecyclerView](https://developer.android.com/guide/topics/ui/layout/recyclerview) - implementing adapters and viewHolders
 * [Glide](https://github.com/bumptech/glide) - loading images
 * [ViewBinding](https://developer.android.com/topic/libraries/view-binding?hl=es-419) - makes it easier to write code that interacts with views
-
+* [Dagger Hilt](https://developer.android.com/training/dependency-injection/hilt-android?hl=es-419) - dependency injection
+* [Mockito](https://developer.android.com/training/testing/local-tests) - local unit tests
 
 
 # Architecture
 
-* [MVVM Architecture](https://developer.android.com/jetpack/guide) (Model - View - ViewModel)
+* [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
+* [MVVM Architecture pattern](https://developer.android.com/jetpack/guide) (Model - View - ViewModel)
