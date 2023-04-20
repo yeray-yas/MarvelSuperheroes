@@ -25,9 +25,14 @@ class MainViewModel @Inject constructor(private val loadSuperheroesUseCase: Load
     fun onCreate() {
         viewModelScope.launch {
             _loading.value = true
-            _superheroes.value = loadSuperheroesUseCase.invoke()
-            _loading.value = false
-            Log.d("MainActivity", loadSuperheroesUseCase.invoke().size.toString())
+            val result = loadSuperheroesUseCase.invoke()
+
+            if (!result.isNullOrEmpty()){
+                _superheroes.value = result
+                _loading.value = false
+                Log.d("MainActivity", loadSuperheroesUseCase.invoke().size.toString())
+            }
+
         }
     }
 }
