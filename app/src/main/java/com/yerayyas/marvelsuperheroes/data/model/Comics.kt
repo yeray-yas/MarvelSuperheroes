@@ -8,11 +8,5 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Comics(
     @SerializedName("available")
-    val available: Int,
-    @SerializedName("collectionURI")
-    val collectionURI: String,
-    @SerializedName("items")
-    val items: List<Item>,
-    @SerializedName("returned")
-    val returned: Int
+    val available: Int
 ): Parcelable

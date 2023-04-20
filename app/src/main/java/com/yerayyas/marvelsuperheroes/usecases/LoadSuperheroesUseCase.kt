@@ -11,6 +11,7 @@ class LoadSuperheroesUseCase @Inject constructor(private val repository: Superhe
     suspend fun invoke(): List<Superhero> = withContext(Dispatchers.IO) {
 
         repository.getSuperheroes()
-    }
 
+
+    }
 }
