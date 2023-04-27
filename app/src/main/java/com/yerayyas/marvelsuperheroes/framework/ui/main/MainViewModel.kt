@@ -27,7 +27,7 @@ class MainViewModel @Inject constructor(private val loadSuperheroesUseCase: Load
             _loading.value = true
             val result = loadSuperheroesUseCase.invoke()
 
-            if (!result.isNullOrEmpty()){
+            if (result.isNotEmpty()){
                 _superheroes.value = result
                 _loading.value = false
                 Log.d("MainActivity", loadSuperheroesUseCase.invoke().size.toString())
