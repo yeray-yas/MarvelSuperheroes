@@ -1,4 +1,4 @@
-package com.yerayyas.marvelsuperheroes.usecases
+package com.yerayyas.marvelsuperheroes.domain.usecases
 
 import com.yerayyas.marvelsuperheroes.data.model.Superhero
 import com.yerayyas.marvelsuperheroes.data.repositories.SuperheroRepository

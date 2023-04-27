@@ -4,7 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.yerayyas.marvelsuperheroes.data.model.Comics
 import com.yerayyas.marvelsuperheroes.data.model.Superhero
 import com.yerayyas.marvelsuperheroes.data.model.Thumbnail
-import com.yerayyas.marvelsuperheroes.usecases.LoadSuperheroesUseCase
+import com.yerayyas.marvelsuperheroes.domain.usecases.LoadSuperheroesUseCase
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.RelaxedMockK

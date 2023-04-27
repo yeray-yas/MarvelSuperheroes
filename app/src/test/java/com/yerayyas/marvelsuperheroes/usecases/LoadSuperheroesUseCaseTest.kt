@@ -4,6 +4,7 @@ import com.yerayyas.marvelsuperheroes.data.model.Comics
 import com.yerayyas.marvelsuperheroes.data.model.Superhero
 import com.yerayyas.marvelsuperheroes.data.model.Thumbnail
 import com.yerayyas.marvelsuperheroes.data.repositories.SuperheroRepository
+import com.yerayyas.marvelsuperheroes.domain.usecases.LoadSuperheroesUseCase
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Test
