@@ -3,4 +3,5 @@
     <string name="character_image">Character image</string>
     <string name="character_description">Description:\n</string>
     <string name="total_available_comics">Total available comics:</string>
+    <string name="no_description_found_text">NO DESCRIPTION FOUND\n</string>
 </resources>
