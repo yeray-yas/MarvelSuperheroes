@@ -4,7 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import com.bumptech.glide.Glide
-import com.yerayyas.marvelsuperheroes.core.utils.inline_functions.parcelable
+import com.yerayyas.marvelsuperheroes.R
+import com.yerayyas.marvelsuperheroes.framework.ui.common.inlibne_functions.parcelable
 import com.yerayyas.marvelsuperheroes.data.model.Superhero
 import com.yerayyas.marvelsuperheroes.databinding.ActivityDetailBinding
 
@@ -33,7 +34,7 @@ class DetailActivity : AppCompatActivity() {
             if (superhero.description.isNotEmpty()){
                 binding.tvDescription.text = superhero.description
             }else{
-                binding.tvDescription.text = "NO DESCRIPTION FOUND\n"
+                binding.tvDescription.text = getString(R.string.no_description_found_text)
             }
 
             bindDetailInfo(binding.tvDetailInfo, superhero)

@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-
         val superheroesAdapter = SuperheroAdapter { superhero ->
             navigateTo(superhero)
 
@@ -32,13 +31,17 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.onCreate()
 
-        viewModel.loading.observe(this) { visible ->
-            binding.progress.visibility = if (visible) View.VISIBLE else View.GONE
-        }
+            viewModel.loading.observe(this) { visible ->
+                binding.progress.visibility = if (visible) View.VISIBLE else View.GONE
+            }
 
-        viewModel.superheroes.observe(this) { superheroes ->
-            superheroesAdapter.superheroes = superheroes
-        }
+            viewModel.superheroes.observe(this) { superheroes ->
+                superheroesAdapter.superheroes = superheroes
+            }
+
+
+
+
     }
 
     private fun navigateTo(superhero: Superhero) {
