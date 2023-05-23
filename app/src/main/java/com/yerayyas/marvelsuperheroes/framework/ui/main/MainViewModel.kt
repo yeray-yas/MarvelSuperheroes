@@ -16,21 +16,11 @@ class MainViewModel @Inject constructor(private val loadSuperheroesUseCase: Load
     ViewModel() {
 
     //LIVEDATA
-     private val _loading = MutableLiveData(false)
-     val loading: LiveData<Boolean> get() = _loading
+    private val _loading = MutableLiveData(false)
+    val loading: LiveData<Boolean> get() = _loading
 
     private val _superheroes = MutableLiveData<List<Superhero>>(emptyList())
     val superheroes: LiveData<List<Superhero>> get() = _superheroes
-
-
-    // StateFlow
-    // private val _loading = MutableStateFlow(false)
-    // val loading: StateFlow<Boolean> get() = _loading
-
-    // private val _superheroes = MutableStateFlow<List<Superhero>>(emptyList())
-    // val superheroes: StateFlow<List<Superhero>> get() = _superheroes
-
-
 
     fun onCreate() {
         viewModelScope.launch {
@@ -40,7 +30,7 @@ class MainViewModel @Inject constructor(private val loadSuperheroesUseCase: Load
             if (result.isNotEmpty()){
                 _superheroes.value = result
                 _loading.value = false
-                Log.d("MainActivity", (loadSuperheroesUseCase.invoke().size + 4).toString())
+                Log.d("MainActivity", loadSuperheroesUseCase.invoke().size.toString())
             }
 
         }
