@@ -1,4 +1,4 @@
-package com.yerayyas.marvelsuperheroes.framework.ui.common.inlibne_functions
+package com.yerayyas.marvelsuperheroes.data.common.inlibne_functions
 
 import android.content.Intent
 import android.os.Build
