@@ -28,6 +28,7 @@ class LaunchingActivity : AppCompatActivity() {
             {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
+                overridePendingTransition(R.anim.auth_detail_enter,R.anim.auth_detail_exit)
                 finish()
             }, 3000
         )

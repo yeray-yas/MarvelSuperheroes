@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import com.yerayyas.marvelsuperheroes.R
 import com.yerayyas.marvelsuperheroes.data.model.Superhero
 import com.yerayyas.marvelsuperheroes.databinding.ActivityMainBinding
 import com.yerayyas.marvelsuperheroes.framework.ui.detail.DetailActivity
@@ -48,5 +49,6 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, DetailActivity::class.java)
         intent.putExtra(DetailActivity.EXTRA_SUPERHERO, superhero)
         startActivity(intent)
+        overridePendingTransition(R.anim.auth_detail_enter,R.anim.auth_detail_exit)
     }
 }
