@@ -2,15 +2,15 @@ package com.yerayyas.marvelsuperheroes.domain.usecases
 
 import com.yerayyas.marvelsuperheroes.data.model.Superhero
 import com.yerayyas.marvelsuperheroes.data.repositories.SuperheroRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class LoadSuperheroesUseCase @Inject constructor(private val repository: SuperheroRepository) {
 
-    suspend fun invoke(): List<Superhero> = withContext(Dispatchers.IO) {
+    suspend fun invoke(): Flow<List<Superhero>> = flow {
 
-        repository.getSuperheroes()
+        emit(repository.getSuperheroes())
 
 
     }
