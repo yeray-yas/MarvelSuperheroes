@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
     private fun collectUIStates() {
         val superheroesAdapter = SuperheroAdapter { superhero ->
             navigateTo(superhero)
@@ -45,7 +44,8 @@ class MainActivity : AppCompatActivity() {
                         is MainUIState.Error -> {
                             binding.progress.isVisible = false
                             Toast.makeText(
-                                this@MainActivity, "Ha ocurrido un error: ${uiState.errorMessage}",
+                                this@MainActivity,
+                                "Ha ocurrido un error: ${uiState.errorMessage}",
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
