@@ -27,17 +27,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        collectUIStates()
+        viewModel.onCreate()
+    }
 
 
+
+    private fun collectUIStates() {
         val superheroesAdapter = SuperheroAdapter { superhero ->
             navigateTo(superhero)
 
         }
-
-        binding.recyclerView.adapter = superheroesAdapter
-
-
-
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { uiState ->
@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        viewModel.onCreate()
+        binding.recyclerView.adapter = superheroesAdapter
     }
 
     private fun navigateTo(superhero: Superhero) {
