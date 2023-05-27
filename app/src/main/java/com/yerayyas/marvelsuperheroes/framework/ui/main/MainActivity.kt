@@ -35,8 +35,8 @@ class MainActivity : AppCompatActivity() {
     private fun collectUIStates() {
         val superheroesAdapter = SuperheroAdapter { superhero ->
             navigateTo(superhero)
-
         }
+
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { uiState ->
