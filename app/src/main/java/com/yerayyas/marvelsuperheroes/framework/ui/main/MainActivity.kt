@@ -21,55 +21,63 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val viewModel by viewModels<MainViewModel>()
-
+    private val superheroesAdapter by lazy { SuperheroAdapter(::navigateTo) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        collectUIStates()
-        viewModel.onCreate()
+        setupRecyclerView()
+        observeUIStates()
     }
 
-
-    private fun collectUIStates() {
-        val superheroesAdapter = SuperheroAdapter { superhero ->
-            navigateTo(superhero)
-        }
-
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.uiState.collect { uiState ->
-                    when (uiState) {
-                        is MainUIState.Error -> {
-                            binding.progress.isVisible = false
-                            Toast.makeText(
-                                this@MainActivity,
-                                "Ha ocurrido un error: ${uiState.errorMessage}",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-
-                        MainUIState.Loading -> {
-                            binding.progress.isVisible = true
-                        }
-
-                        is MainUIState.Success -> {
-                            binding.progress.isVisible = false
-                            val data = uiState.data
-                            superheroesAdapter.superheroes = data
-                        }
-                    }
-                }
-            }
-        }
+    private fun setupRecyclerView() {
         binding.recyclerView.adapter = superheroesAdapter
     }
 
+    private fun observeUIStates() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState.collect { uiState ->
+                    handleUIState(uiState)
+                }
+            }
+        }
+    }
+
+    private fun handleUIState(uiState: MainUIState) {
+        when (uiState) {
+            is MainUIState.Error -> {
+                binding.progress.isVisible = false
+                showToast("An error has occurred: ${uiState.errorMessage}")
+            }
+
+            MainUIState.Loading -> {
+                binding.progress.isVisible = true
+            }
+
+            is MainUIState.Success -> {
+                binding.progress.isVisible = false
+                val data = uiState.data
+                superheroesAdapter.superheroes = data
+            }
+        }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
     private fun navigateTo(superhero: Superhero) {
-        val intent = Intent(this, DetailActivity::class.java)
-        intent.putExtra(DetailActivity.EXTRA_SUPERHERO, superhero)
+        val intent = Intent(this, DetailActivity::class.java).apply {
+            putExtra(DetailActivity.EXTRA_SUPERHERO, superhero)
+        }
         startActivity(intent)
-        overridePendingTransition(R.anim.auth_detail_enter, R.anim.auth_detail_exit)
+        overridePendingTransition(
+            R.anim.auth_detail_enter,
+            R.anim.auth_detail_exit
+        )
     }
 }
+
+

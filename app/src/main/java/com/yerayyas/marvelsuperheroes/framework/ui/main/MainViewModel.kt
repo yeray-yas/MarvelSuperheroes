@@ -23,14 +23,31 @@ class MainViewModel @Inject constructor(private val loadSuperheroesUseCase: Load
     private val _superheroes = MutableStateFlow<List<Superhero>>(emptyList())
     val superheroes: StateFlow<List<Superhero>> = _superheroes
 
-    fun onCreate() {
+    init {
+        fetchSuperheroes()
+    }
+
+    private fun fetchSuperheroes() {
         viewModelScope.launch {
             loadSuperheroesUseCase.invoke()
-                .catch { _uiState.value = MainUIState.Error(it.message.orEmpty()) }
-                .flowOn(Dispatchers.IO)
-                .collect {
-                    _uiState.value = MainUIState.Success(it)
+                .catch { throwable ->
+                    handleFetchError(throwable)
                 }
+                .flowOn(Dispatchers.IO)
+                .collect { superheroes ->
+                    handleFetchSuccess(superheroes)
+                }
+
         }
+    }
+
+    private fun handleFetchSuccess(superheroes: List<Superhero>) {
+        _superheroes.value = superheroes
+        _uiState.value = MainUIState.Success(superheroes)
+    }
+
+    private fun handleFetchError(throwable: Throwable) {
+        val errorMessage = throwable.message.orEmpty()
+        _uiState.value = MainUIState.Error(errorMessage)
     }
 }
