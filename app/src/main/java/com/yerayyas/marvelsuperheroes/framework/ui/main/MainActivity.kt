@@ -48,16 +48,16 @@ class MainActivity : AppCompatActivity() {
     private fun handleUIState(uiState: MainUIState) {
         when (uiState) {
             is MainUIState.Error -> {
-                binding.progress.isVisible = false
+                binding.viewLoading.isVisible = false
                 showToast("An error has occurred: ${uiState.errorMessage}")
             }
 
             MainUIState.Loading -> {
-                binding.progress.isVisible = true
+                binding.viewLoading.isVisible = true
             }
 
             is MainUIState.Success -> {
-                binding.progress.isVisible = false
+                binding.viewLoading.isVisible = false
                 val data = uiState.data
                 superheroesAdapter.superheroes = data
             }
