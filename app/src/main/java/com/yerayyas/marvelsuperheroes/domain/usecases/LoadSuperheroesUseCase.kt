@@ -2,8 +2,10 @@ package com.yerayyas.marvelsuperheroes.domain.usecases
 
 import com.yerayyas.marvelsuperheroes.data.model.Superhero
 import com.yerayyas.marvelsuperheroes.data.repositories.SuperheroRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 class LoadSuperheroesUseCase @Inject constructor(private val repository: SuperheroRepository) {
@@ -13,5 +15,5 @@ class LoadSuperheroesUseCase @Inject constructor(private val repository: Superhe
         emit(repository.getSuperheroes())
 
 
-    }
+    }.flowOn(Dispatchers.IO)
 }

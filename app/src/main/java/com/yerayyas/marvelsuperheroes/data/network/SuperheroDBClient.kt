@@ -6,7 +6,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object SuperheroDbClient {  //This is a singleton. It will make only one retrofit instance
 
-
     private val retrofit = Retrofit.Builder()
         .baseUrl(BuildConfig.BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())

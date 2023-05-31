@@ -27,8 +27,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setupRecyclerView()
-        observeUIStates()
+            setupRecyclerView()
+            observeUIStates()
+
     }
 
     private fun setupRecyclerView() {
@@ -49,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         when (uiState) {
             is MainUIState.Error -> {
                 binding.viewLoading.isVisible = false
-                showToast("An error has occurred: ${uiState.errorMessage}")
+                showToast("An error has occurred: ${uiState.msg}")
             }
 
             MainUIState.Loading -> {
