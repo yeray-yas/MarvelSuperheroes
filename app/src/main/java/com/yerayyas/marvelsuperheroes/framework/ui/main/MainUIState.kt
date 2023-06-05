@@ -1,6 +1,6 @@
 package com.yerayyas.marvelsuperheroes.framework.ui.main
 
-import com.yerayyas.marvelsuperheroes.data.model.Superhero
+import com.yerayyas.marvelsuperheroes.domain.model.Superhero
 
 sealed class MainUIState {
     object Loading : MainUIState()

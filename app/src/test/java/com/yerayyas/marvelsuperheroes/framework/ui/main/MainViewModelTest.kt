@@ -1,9 +1,9 @@
 package com.yerayyas.marvelsuperheroes.framework.ui.main
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.yerayyas.marvelsuperheroes.data.model.Comics
-import com.yerayyas.marvelsuperheroes.data.model.Superhero
-import com.yerayyas.marvelsuperheroes.data.model.Thumbnail
+import com.yerayyas.marvelsuperheroes.domain.model.Comics
+import com.yerayyas.marvelsuperheroes.domain.model.Superhero
+import com.yerayyas.marvelsuperheroes.domain.model.Thumbnail
 import com.yerayyas.marvelsuperheroes.domain.usecases.LoadSuperheroesUseCase
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -63,7 +63,7 @@ class MainViewModelTest {
         coEvery { loadSuperheroesUseCase.invoke() } returns expectedSuperheroes
 
         // When
-        mainViewModel.onCreate()
+        mainViewModel.fetchSuperheroes()
 
         // Then
         assert(mainViewModel.superheroes.value == expectedSuperheroes)

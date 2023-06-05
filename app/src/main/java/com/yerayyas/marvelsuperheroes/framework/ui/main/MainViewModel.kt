@@ -2,7 +2,7 @@ package com.yerayyas.marvelsuperheroes.framework.ui.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.yerayyas.marvelsuperheroes.data.model.Superhero
+import com.yerayyas.marvelsuperheroes.domain.model.Superhero
 import com.yerayyas.marvelsuperheroes.domain.usecases.LoadSuperheroesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -25,7 +25,7 @@ class MainViewModel @Inject constructor(private val loadSuperheroesUseCase: Load
         fetchSuperheroes()
     }
 
-    private fun fetchSuperheroes() {
+    fun fetchSuperheroes() {
         viewModelScope.launch {
             loadSuperheroesUseCase.invoke()
                 .catch { throwable ->

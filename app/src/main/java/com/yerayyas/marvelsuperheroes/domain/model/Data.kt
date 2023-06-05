@@ -1,4 +1,4 @@
-package com.yerayyas.marvelsuperheroes.data.model
+package com.yerayyas.marvelsuperheroes.domain.model
 
 
 import android.os.Parcelable

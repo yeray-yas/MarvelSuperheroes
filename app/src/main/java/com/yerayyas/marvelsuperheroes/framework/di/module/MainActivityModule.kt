@@ -1,4 +1,4 @@
-package com.yerayyas.marvelsuperheroes.framework.ui.main
+package com.yerayyas.marvelsuperheroes.framework.di.module
 
 import com.yerayyas.marvelsuperheroes.data.repositories.SuperheroRepository
 import com.yerayyas.marvelsuperheroes.domain.usecases.LoadSuperheroesUseCase

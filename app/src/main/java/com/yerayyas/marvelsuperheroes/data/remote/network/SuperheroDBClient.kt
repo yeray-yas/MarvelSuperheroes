@@ -1,4 +1,4 @@
-package com.yerayyas.marvelsuperheroes.data.network
+package com.yerayyas.marvelsuperheroes.data.remote.network
 
 import com.yerayyas.marvelsuperheroes.BuildConfig
 import retrofit2.Retrofit

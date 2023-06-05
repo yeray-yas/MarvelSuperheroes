@@ -1,6 +1,6 @@
 package com.yerayyas.marvelsuperheroes.domain.usecases
 
-import com.yerayyas.marvelsuperheroes.data.model.Superhero
+import com.yerayyas.marvelsuperheroes.domain.model.Superhero
 import com.yerayyas.marvelsuperheroes.data.repositories.SuperheroRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow

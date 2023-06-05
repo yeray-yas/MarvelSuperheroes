@@ -10,7 +10,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.yerayyas.marvelsuperheroes.R
-import com.yerayyas.marvelsuperheroes.data.model.Superhero
+import com.yerayyas.marvelsuperheroes.domain.model.Superhero
 import com.yerayyas.marvelsuperheroes.databinding.ActivityMainBinding
 import com.yerayyas.marvelsuperheroes.framework.ui.detail.DetailActivity
 import dagger.hilt.android.AndroidEntryPoint

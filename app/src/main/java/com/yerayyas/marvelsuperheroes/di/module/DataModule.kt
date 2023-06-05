@@ -1,6 +1,6 @@
-package com.yerayyas.marvelsuperheroes.data
+package com.yerayyas.marvelsuperheroes.di.module
 
-import com.yerayyas.marvelsuperheroes.data.dataSources.RemoteDataSource
+import com.yerayyas.marvelsuperheroes.data.remote.dataSources.RemoteDataSource
 import com.yerayyas.marvelsuperheroes.data.repositories.SuperheroRepository
 import dagger.Module
 import dagger.Provides

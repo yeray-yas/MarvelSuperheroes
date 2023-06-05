@@ -1,8 +1,8 @@
-package com.yerayyas.marvelsuperheroes.framework
+package com.yerayyas.marvelsuperheroes.framework.di.module
 
 import android.app.Application
-import com.yerayyas.marvelsuperheroes.data.dataSources.RemoteDataSource
-import com.yerayyas.marvelsuperheroes.framework.data.dataSources.ServerSuperheroDataSource
+import com.yerayyas.marvelsuperheroes.data.remote.dataSources.RemoteDataSource
+import com.yerayyas.marvelsuperheroes.data.remote.dataSources.ServerSuperheroDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,8 +1,8 @@
 package com.yerayyas.marvelsuperheroes.usecases
 
-import com.yerayyas.marvelsuperheroes.data.model.Comics
-import com.yerayyas.marvelsuperheroes.data.model.Superhero
-import com.yerayyas.marvelsuperheroes.data.model.Thumbnail
+import com.yerayyas.marvelsuperheroes.domain.model.Comics
+import com.yerayyas.marvelsuperheroes.domain.model.Superhero
+import com.yerayyas.marvelsuperheroes.domain.model.Thumbnail
 import com.yerayyas.marvelsuperheroes.data.repositories.SuperheroRepository
 import com.yerayyas.marvelsuperheroes.domain.usecases.LoadSuperheroesUseCase
 import kotlinx.coroutines.runBlocking
