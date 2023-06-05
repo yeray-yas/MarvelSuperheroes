@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yerayyas.marvelsuperheroes.domain.model.Superhero
 import com.yerayyas.marvelsuperheroes.domain.usecases.LoadSuperheroesUseCase
+import com.yerayyas.marvelsuperheroes.framework.states.MainUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

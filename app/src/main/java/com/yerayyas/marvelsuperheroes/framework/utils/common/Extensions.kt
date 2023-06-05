@@ -1,4 +1,4 @@
-package com.yerayyas.marvelsuperheroes.framework.ui
+package com.yerayyas.marvelsuperheroes.framework.utils.common
 
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView

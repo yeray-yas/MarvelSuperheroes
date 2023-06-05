@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.yerayyas.marvelsuperheroes.domain.model.Superhero
 import com.yerayyas.marvelsuperheroes.databinding.ViewSuperheroItemBinding
-import com.yerayyas.marvelsuperheroes.framework.ui.basicDiffUtil
+import com.yerayyas.marvelsuperheroes.framework.utils.common.basicDiffUtil
 
 class SuperheroAdapter(
 

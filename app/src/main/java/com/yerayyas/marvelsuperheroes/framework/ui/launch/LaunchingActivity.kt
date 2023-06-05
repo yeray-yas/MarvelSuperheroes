@@ -1,4 +1,4 @@
-package com.yerayyas.marvelsuperheroes.framework.ui.splash
+package com.yerayyas.marvelsuperheroes.framework.ui.launch
 
 import android.content.Intent
 import android.os.Bundle

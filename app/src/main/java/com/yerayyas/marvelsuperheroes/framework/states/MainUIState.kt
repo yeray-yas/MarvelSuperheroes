@@ -1,4 +1,4 @@
-package com.yerayyas.marvelsuperheroes.framework.ui.main
+package com.yerayyas.marvelsuperheroes.framework.states
 
 import com.yerayyas.marvelsuperheroes.domain.model.Superhero
 

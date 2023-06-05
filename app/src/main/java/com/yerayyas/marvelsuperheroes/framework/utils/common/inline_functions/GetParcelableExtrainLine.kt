@@ -1,4 +1,4 @@
-package com.yerayyas.marvelsuperheroes.framework.utils.common.inlibne_functions
+package com.yerayyas.marvelsuperheroes.framework.utils.common.inline_functions
 
 import android.content.Intent
 import android.os.Build
