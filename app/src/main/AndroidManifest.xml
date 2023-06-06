@@ -24,17 +24,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".framework.ui.detail.DetailActivity"
-            android:theme="@style/Theme.MarvelSuperheroes.NoActionBar"
-            android:exported="false"
-            android:parentActivityName=".framework.ui.main.MainActivity" />
-        <activity
-            android:name=".framework.ui.main.MainActivity"
-            android:theme="@style/Theme.MarvelSuperheroes.NoActionBar"
-            android:exported="false">
-
-        </activity>
     </application>
 
 </manifest>
