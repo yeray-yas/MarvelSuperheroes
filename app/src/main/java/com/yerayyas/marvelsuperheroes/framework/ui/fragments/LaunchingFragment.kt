@@ -15,8 +15,9 @@ import androidx.fragment.app.replace
 import com.yerayyas.marvelsuperheroes.R
 import com.yerayyas.marvelsuperheroes.databinding.ActivityLaunchingBinding
 import com.yerayyas.marvelsuperheroes.databinding.FragmentLaunchingBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class LaunchingFragment : Fragment(R.layout.fragment_launching) {
 
     private lateinit var handler: Handler

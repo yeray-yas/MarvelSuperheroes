@@ -12,12 +12,16 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.yerayyas.marvelsuperheroes.R
 import com.yerayyas.marvelsuperheroes.databinding.FragmentHomeBinding
 import com.yerayyas.marvelsuperheroes.domain.model.Superhero
 import com.yerayyas.marvelsuperheroes.framework.states.MainUIState
+import com.yerayyas.marvelsuperheroes.framework.ui.detail.DetailActivity
 import com.yerayyas.marvelsuperheroes.framework.ui.main.MainViewModel
 import com.yerayyas.marvelsuperheroes.framework.ui.main.SuperheroAdapter
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 // TODO: Rename parameter arguments, choose names that match
@@ -30,10 +34,13 @@ private const val ARG_PARAM2 = "param2"
  * Use the [HomeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private val viewModel by viewModels<MainViewModel>()
+    //private lateinit var viewModel: MainViewModel
     private val superheroesAdapter by lazy { SuperheroAdapter(::navigateTo) }
 
     // TODO: Rename and change types of parameters
@@ -53,7 +60,11 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
+        //viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+
         setupRecyclerView()
         observeUIStates()
         // Inflate the layout for this fragment
