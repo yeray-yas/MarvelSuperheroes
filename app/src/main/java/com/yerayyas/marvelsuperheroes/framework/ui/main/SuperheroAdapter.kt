@@ -10,7 +10,7 @@ import com.yerayyas.marvelsuperheroes.framework.utils.common.basicDiffUtil
 
 class SuperheroAdapter(
 
-    private val superheroClickedListener: (Superhero) -> Unit
+    //private val superheroClickedListener: (Superhero) -> Unit
 ) :
     RecyclerView.Adapter<SuperheroAdapter.ViewHolder>() {
 
@@ -37,7 +37,7 @@ class SuperheroAdapter(
         val superhero = superheroes[position]
         holder.bind(superhero)
         holder.itemView.setOnClickListener {
-            superheroClickedListener(superhero)
+            //superheroClickedListener(superhero)
         }
     }
 

@@ -2,25 +2,29 @@ package com.yerayyas.marvelsuperheroes.framework.ui.launch
 
 
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import com.yerayyas.marvelsuperheroes.R
+import com.yerayyas.marvelsuperheroes.databinding.ActivityLaunchingBinding
 import com.yerayyas.marvelsuperheroes.framework.ui.fragments.LaunchingFragment
-import com.yerayyas.marvelsuperheroes.framework.ui.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class LaunchingActivity : AppCompatActivity() {
-    private val viewModel by viewModels<MainViewModel>()
+    private lateinit var binding: ActivityLaunchingBinding
+    // private val viewModel by viewModels<MainViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_launching)
+        binding = ActivityLaunchingBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        supportFragmentManager.commit {
-            setReorderingAllowed(true)
-            add<LaunchingFragment>(R.id.fcv_main_container)
+        if (savedInstanceState== null){
+            supportFragmentManager.commit {
+                setReorderingAllowed(true)
+                add<LaunchingFragment>(R.id.fcv_main_container)
+            }
         }
+
     }
 }

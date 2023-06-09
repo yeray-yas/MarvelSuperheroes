@@ -1,5 +1,6 @@
 package com.yerayyas.marvelsuperheroes.framework.ui.main
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yerayyas.marvelsuperheroes.domain.model.Superhero
@@ -42,10 +43,13 @@ class MainViewModel @Inject constructor(private val loadSuperheroesUseCase: Load
     private fun handleFetchSuccess(superheroes: List<Superhero>) {
         _superheroes.value = superheroes
         _uiState.value = MainUIState.Success(superheroes)
+        Log.i("YASTO", "Fetch success")
     }
 
     private fun handleFetchError(throwable: Throwable) {
         val errorMessage = throwable.cause
         _uiState.value = MainUIState.Error(errorMessage)
     }
+
+
 }
