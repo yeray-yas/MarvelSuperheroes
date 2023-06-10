@@ -59,7 +59,6 @@ class LaunchingFragment : Fragment() {
         handler.postDelayed(
             {
                 Log.i("YASTA", "It works")
-                //Toast.makeText(context, "Let's go to the second Fragment", Toast.LENGTH_SHORT).show()
                 parentFragmentManager.commit {
                     replace<MasterFragment>(R.id.fcv_main_container)
                     setReorderingAllowed(true)

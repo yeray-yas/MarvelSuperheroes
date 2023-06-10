@@ -12,7 +12,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class LaunchingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLaunchingBinding
-    // private val viewModel by viewModels<MainViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLaunchingBinding.inflate(layoutInflater)

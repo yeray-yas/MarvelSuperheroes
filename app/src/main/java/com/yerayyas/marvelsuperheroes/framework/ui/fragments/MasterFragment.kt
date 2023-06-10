@@ -8,10 +8,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
+import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.yerayyas.marvelsuperheroes.R
 import com.yerayyas.marvelsuperheroes.databinding.FragmentMasterBinding
 import com.yerayyas.marvelsuperheroes.domain.model.Superhero
 import com.yerayyas.marvelsuperheroes.framework.states.MainUIState
@@ -117,11 +119,16 @@ class MasterFragment : Fragment() {
         val detailFragment = DetailFragment()
         detailFragment.arguments = bundle
 
-//        parentFragmentManager.commit {
-//            replace<DetailFragment>(R.id.fcv_main_container)
-//            setReorderingAllowed(true)
-//            addToBackStack("principalBackStack")
-//        }
+//        parentFragmentManager.beginTransaction()
+//            .replace(R.id.fcv_main_container, detailFragment)
+//            .addToBackStack(null)
+//            .commit()
+
+        parentFragmentManager.commit {
+            replace(R.id.fcv_main_container, detailFragment)
+            setReorderingAllowed(true)
+            addToBackStack("principalBackStack")
+        }
         //parentFragmentManager.setFragmentResult("key",bundle)
         //    val intent = Intent(this, DetailActivity::class.java).apply {
 //            putExtra(DetailActivity.EXTRA_SUPERHERO, superhero)
