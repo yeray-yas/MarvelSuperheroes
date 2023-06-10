@@ -1,36 +1,28 @@
 package com.yerayyas.marvelsuperheroes.framework.ui.launch
 
-import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
-import com.airbnb.lottie.LottieAnimationView
+import androidx.fragment.app.add
+import androidx.fragment.app.commit
 import com.yerayyas.marvelsuperheroes.R
-import com.yerayyas.marvelsuperheroes.framework.ui.main.MainActivity
+import com.yerayyas.marvelsuperheroes.databinding.ActivityLaunchingBinding
+import com.yerayyas.marvelsuperheroes.framework.ui.fragments.LaunchingFragment
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class LaunchingActivity : AppCompatActivity() {
-    private lateinit var handler: Handler
+    private lateinit var binding: ActivityLaunchingBinding
+    // private val viewModel by viewModels<MainViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_launching)
+        binding = ActivityLaunchingBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-
-        val lottieAnimationView: LottieAnimationView = findViewById(R.id.lottieAnim)
-
-        lottieAnimationView.setAnimation(R.raw.superheroes_animation)
-        lottieAnimationView.playAnimation()
-
-
-        handler = Handler(Looper.myLooper()!!)
-        handler.postDelayed(
-            {
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                overridePendingTransition(R.anim.auth_detail_enter,R.anim.auth_detail_exit)
-                finish()
-            }, 3000
-        )
+        if (savedInstanceState== null){
+            supportFragmentManager.commit {
+                setReorderingAllowed(true)
+                add<LaunchingFragment>(R.id.fcv_main_container)
+            }
+        }
     }
 }
