@@ -11,7 +11,7 @@ import com.yerayyas.marvelsuperheroes.framework.ui.fragments.LaunchingFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LaunchingActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLaunchingBinding
     // private val viewModel by viewModels<MainViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +25,5 @@ class LaunchingActivity : AppCompatActivity() {
                 add<LaunchingFragment>(R.id.fcv_main_container)
             }
         }
-
     }
 }

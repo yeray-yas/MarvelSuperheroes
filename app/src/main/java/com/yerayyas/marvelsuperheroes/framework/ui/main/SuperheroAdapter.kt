@@ -1,7 +1,9 @@
 package com.yerayyas.marvelsuperheroes.framework.ui.main
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.yerayyas.marvelsuperheroes.domain.model.Superhero
@@ -10,7 +12,7 @@ import com.yerayyas.marvelsuperheroes.framework.utils.common.basicDiffUtil
 
 class SuperheroAdapter(
 
-    //private val superheroClickedListener: (Superhero) -> Unit
+    private val superheroClickedListener: (Superhero) -> Unit
 ) :
     RecyclerView.Adapter<SuperheroAdapter.ViewHolder>() {
 
@@ -37,7 +39,7 @@ class SuperheroAdapter(
         val superhero = superheroes[position]
         holder.bind(superhero)
         holder.itemView.setOnClickListener {
-            //superheroClickedListener(superhero)
+           superheroClickedListener(superhero)
         }
     }
 

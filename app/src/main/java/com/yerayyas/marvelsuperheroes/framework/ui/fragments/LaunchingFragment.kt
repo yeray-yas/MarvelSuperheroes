@@ -14,11 +14,14 @@ import com.yerayyas.marvelsuperheroes.R
 import com.yerayyas.marvelsuperheroes.databinding.FragmentLaunchingBinding
 import dagger.hilt.android.AndroidEntryPoint
 
+private const val ANIMATION_DURATION = 3000L
+
 @AndroidEntryPoint
 class LaunchingFragment : Fragment(R.layout.fragment_launching) {
 
     private lateinit var handler: Handler
     private lateinit var binding: FragmentLaunchingBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,9 +34,8 @@ class LaunchingFragment : Fragment(R.layout.fragment_launching) {
     ): View {
 
         binding = FragmentLaunchingBinding.inflate(inflater, container, false)
+
         playTheAnimation()
-
-
 
         handler = Handler(Looper.myLooper()!!)
         handler.postDelayed(
@@ -41,11 +43,11 @@ class LaunchingFragment : Fragment(R.layout.fragment_launching) {
                 Log.i("YASTA", "It works")
                 //Toast.makeText(context, "Let's go to the second Fragment", Toast.LENGTH_SHORT).show()
                 parentFragmentManager.commit {
-                    replace<HomeFragment>(R.id.fcv_main_container)
+                    replace<MasterFragment>(R.id.fcv_main_container)
                     setReorderingAllowed(true)
                     //addToBackStack("principal")
                 }
-            }, 3000
+            }, ANIMATION_DURATION
         )
 
 
