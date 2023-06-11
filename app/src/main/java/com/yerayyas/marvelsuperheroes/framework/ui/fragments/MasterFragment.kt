@@ -88,26 +88,35 @@ class MasterFragment : Fragment() {
     }
 
     private fun handleUIState(uiState: MainUIState) {
-        when (uiState) {
-            is MainUIState.Error -> {
-                binding.viewLoading.isVisible = false
-                showToast("An error has occurred: ${uiState.msg}")
-            }
-
-            MainUIState.Loading -> {
-                binding.viewLoading.isVisible = true
-            }
-
-            is MainUIState.Success -> {
-                binding.viewLoading.isVisible = false
-                val data = uiState.data
-                superheroesAdapter.superheroes = data
+        with(binding.viewLoading){
+            when (uiState) {
+                is MainUIState.Error.NetworkError -> {
+                    isVisible = false
+                    showToast(uiState.message)
+                }
+                is MainUIState.Error.ServerError -> {
+                    isVisible = false
+                    showToast("${uiState.message}, ${uiState.code}")
+                }
+                is MainUIState.Error.UnknownError -> {
+                    isVisible = false
+                    showToast(uiState.message)
+                }
+                MainUIState.Loading -> {
+                    isVisible = true
+                }
+                is MainUIState.Success -> {
+                   isVisible = false
+                    val data = uiState.data
+                    superheroesAdapter.superheroes = data
+                }
             }
         }
+
     }
 
     private fun showToast(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 
     private fun navigateTo(superhero: Superhero) {
@@ -119,25 +128,11 @@ class MasterFragment : Fragment() {
         val detailFragment = DetailFragment()
         detailFragment.arguments = bundle
 
-//        parentFragmentManager.beginTransaction()
-//            .replace(R.id.fcv_main_container, detailFragment)
-//            .addToBackStack(null)
-//            .commit()
-
         parentFragmentManager.commit {
             replace(R.id.fcv_main_container, detailFragment)
             setReorderingAllowed(true)
             addToBackStack("principalBackStack")
         }
-        //parentFragmentManager.setFragmentResult("key",bundle)
-        //    val intent = Intent(this, DetailActivity::class.java).apply {
-//            putExtra(DetailActivity.EXTRA_SUPERHERO, superhero)
-//        }
-//        startActivity(intent)
-//        overridePendingTransition(
-//            R.anim.auth_detail_enter,
-//            R.anim.auth_detail_exit
-//        )
     }
 
     companion object {

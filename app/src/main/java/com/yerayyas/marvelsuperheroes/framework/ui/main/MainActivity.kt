@@ -28,9 +28,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-            setupRecyclerView()
-            observeUIStates()
-
+        setupRecyclerView()
+        observeUIStates()
     }
 
     private fun setupRecyclerView() {
@@ -49,20 +48,28 @@ class MainActivity : AppCompatActivity() {
 
     private fun handleUIState(uiState: MainUIState) {
         when (uiState) {
-            is MainUIState.Error -> {
+            is MainUIState.Error.NetworkError -> {
                 binding.viewLoading.isVisible = false
-                showToast("An error has occurred: ${uiState.msg}")
+                showToast("Error de red: ${uiState.message}")
             }
-
+            is MainUIState.Error.ServerError -> {
+                binding.viewLoading.isVisible = false
+                showToast("Error del servidor (${uiState.code}): ${uiState.message}")
+            }
+            is MainUIState.Error.UnknownError -> {
+                binding.viewLoading.isVisible = false
+                showToast("Error inesperado: ${uiState.message}")
+            }
             MainUIState.Loading -> {
                 binding.viewLoading.isVisible = true
             }
-
             is MainUIState.Success -> {
                 binding.viewLoading.isVisible = false
                 val data = uiState.data
                 superheroesAdapter.superheroes = data
             }
+
+
         }
     }
 
