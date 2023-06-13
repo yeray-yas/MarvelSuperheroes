@@ -121,7 +121,6 @@ class MasterFragment : Fragment() {
 
     private fun navigateTo(superhero: Superhero) {
 
-        showToast("You have pressed a card")
         val bundle = Bundle()
         bundle.putParcelable("superhero", superhero)
 
