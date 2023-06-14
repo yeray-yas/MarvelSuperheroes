@@ -58,7 +58,6 @@ class DetailFragment : Fragment() {
         bindDetailInfo(binding.tvDetailInfo, superhero)
     }
 
-
     private fun bindDetailInfo(tvDetailInfo: TextView, superhero: Superhero) {
         tvDetailInfo.text = superhero.comics.available.toString()
     }
