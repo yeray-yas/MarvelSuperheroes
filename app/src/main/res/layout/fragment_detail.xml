@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".framework.ui.detail.DetailActivity">
+    tools:context=".framework.ui.main.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
@@ -31,12 +31,12 @@
                 tools:srcCompat="@tools:sample/avatars"
                 android:fitsSystemWindows="true">
             </ImageView>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
-                android:background="#95303F9F"
+                android:background="#959F3039"
                 android:layout_gravity="bottom"/>
-
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"

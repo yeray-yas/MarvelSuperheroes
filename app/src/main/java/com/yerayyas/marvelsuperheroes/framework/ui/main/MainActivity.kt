@@ -9,6 +9,7 @@ import com.yerayyas.marvelsuperheroes.databinding.ActivityLaunchingBinding
 import com.yerayyas.marvelsuperheroes.framework.ui.fragments.LaunchingFragment
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLaunchingBinding

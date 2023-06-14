@@ -102,9 +102,11 @@ class MasterFragment : Fragment() {
         }
 
         parentFragmentManager.commit {
+            setCustomAnimations(R.anim.slide_left_enter, R.anim.slide_left_exit)
+
             replace(R.id.fcv_main_container, detailFragment)
             setReorderingAllowed(true)
-            addToBackStack("principalBackStack")
+            addToBackStack(null)
         }
     }
 }
