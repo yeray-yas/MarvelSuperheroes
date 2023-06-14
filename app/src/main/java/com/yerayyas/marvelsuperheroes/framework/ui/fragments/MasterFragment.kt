@@ -36,7 +36,6 @@ class MasterFragment : Fragment() {
         activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 if (shouldInterceptBackPress()) {
-                    Toast.makeText(requireContext(), "Closing the app", Toast.LENGTH_SHORT).show()
                     activity!!.finish()
                 } else {
                     isEnabled = false
@@ -44,7 +43,6 @@ class MasterFragment : Fragment() {
                 }
             }
         })
-
     }
 
     private fun shouldInterceptBackPress() = true
@@ -53,12 +51,9 @@ class MasterFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         binding = FragmentMasterBinding.inflate(inflater, container, false)
-
         setupRecyclerView()
         observeUIStates()
-
         // Inflate the layout for this fragment
         return binding.root
     }
@@ -86,6 +81,7 @@ class MasterFragment : Fragment() {
                     val data = result.value
                     superheroesAdapter.superheroes = data
                 }
+
                 is Result.Error -> {
                     isVisible = false
                     when (val failure = result.failure) {
@@ -95,7 +91,7 @@ class MasterFragment : Fragment() {
                     }
                 }
 
-                Result.Loading ->  Log.i("TAGG", "Ok")
+                Result.Loading -> Log.i("TAGG", "Ok")
             }
         }
 

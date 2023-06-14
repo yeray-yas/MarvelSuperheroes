@@ -1,4 +1,4 @@
-package com.yerayyas.marvelsuperheroes.framework.ui.launch
+package com.yerayyas.marvelsuperheroes.framework.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +10,7 @@ import com.yerayyas.marvelsuperheroes.framework.ui.fragments.LaunchingFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LaunchingActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLaunchingBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
