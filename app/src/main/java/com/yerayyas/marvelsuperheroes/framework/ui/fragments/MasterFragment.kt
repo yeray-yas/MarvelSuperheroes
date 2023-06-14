@@ -1,7 +1,6 @@
 package com.yerayyas.marvelsuperheroes.framework.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -31,18 +30,20 @@ class MasterFragment : Fragment() {
     private val viewModel by viewModels<MainViewModel>()
     private val superheroesAdapter by lazy { SuperheroAdapter(::navigateTo) }
 
+    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            if (shouldInterceptBackPress()) {
+                requireActivity().finish()
+            } else {
+                isEnabled = false
+                parentFragmentManager.popBackStack()
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                if (shouldInterceptBackPress()) {
-                    activity!!.finish()
-                } else {
-                    isEnabled = false
-                    activity?.onBackPressedDispatcher!!.onBackPressed()
-                }
-            }
-        })
+        requireActivity().onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
     }
 
     private fun shouldInterceptBackPress() = true
@@ -54,17 +55,15 @@ class MasterFragment : Fragment() {
         binding = FragmentMasterBinding.inflate(inflater, container, false)
         setupRecyclerView()
         observeUIStates()
-        // Inflate the layout for this fragment
         return binding.root
     }
-
 
     private fun setupRecyclerView() {
         binding.recyclerView.adapter = superheroesAdapter
     }
 
     private fun observeUIStates() {
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { result ->
                     handleResult(result)
@@ -75,26 +74,18 @@ class MasterFragment : Fragment() {
 
     private fun handleResult(result: Result<List<Superhero>, Failure>) {
         with(binding.viewLoading) {
-            when (result) {
-                is Result.Success -> {
-                    isVisible = false
-                    val data = result.value
-                    superheroesAdapter.superheroes = data
-                }
+            isVisible = result is Result.Loading
 
-                is Result.Error -> {
-                    isVisible = false
-                    when (val failure = result.failure) {
-                        is Failure.NetworkError -> showToast("Network error. Verify your internet connection.")
-                        is Failure.ServerError -> showToast("Server error. Code (${failure.code}): ${failure.message}")
-                        is Failure.UnknownError -> showToast("Unknown error has occurred. ${failure.message}")
-                    }
+            if (result is Result.Success) {
+                superheroesAdapter.superheroes = result.value
+            } else if (result is Result.Error) {
+                when (val failure = result.failure) {
+                    is Failure.NetworkError -> showToast("Network error. Verify your internet connection.")
+                    is Failure.ServerError -> showToast("Server error. Code (${failure.code}): ${failure.message}")
+                    is Failure.UnknownError -> showToast("Unknown error has occurred. ${failure.message}")
                 }
-
-                Result.Loading -> Log.i("TAGG", "Ok")
             }
         }
-
     }
 
     private fun showToast(message: String) {
@@ -102,12 +93,13 @@ class MasterFragment : Fragment() {
     }
 
     private fun navigateTo(superhero: Superhero) {
+        val bundle = Bundle().apply {
+            putParcelable("superhero", superhero)
+        }
 
-        val bundle = Bundle()
-        bundle.putParcelable("superhero", superhero)
-
-        val detailFragment = DetailFragment()
-        detailFragment.arguments = bundle
+        val detailFragment = DetailFragment().apply {
+            arguments = bundle
+        }
 
         parentFragmentManager.commit {
             replace(R.id.fcv_main_container, detailFragment)
@@ -116,3 +108,6 @@ class MasterFragment : Fragment() {
         }
     }
 }
+
+
+

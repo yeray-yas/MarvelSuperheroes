@@ -20,10 +20,10 @@ class LoadSuperheroesUseCase @Inject constructor(private val repository: Superhe
         try {
             val superheroes = repository.getSuperheroes()
             emit(Result.Success(superheroes))
-        } catch (e:IOException) {
-            emit(Result.Error(Failure.NetworkError(e.message)))
-        } catch (e:HttpException) {
-            emit(Result.Error(Failure.ServerError(e.code(), e.message)))
+        } catch (networkException:IOException) {
+            emit(Result.Error(Failure.NetworkError(networkException.message)))
+        } catch (serverException:HttpException) {
+            emit(Result.Error(Failure.ServerError(serverException.code(), serverException.message)))
         } catch (otherException: Exception) {
             emit(Result.Error(Failure.UnknownError(otherException.message)))
         }

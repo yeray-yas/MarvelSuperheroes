@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import com.yerayyas.marvelsuperheroes.framework.states.Result
+import kotlinx.coroutines.flow.catch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -26,13 +27,15 @@ class MainViewModel @Inject constructor(private val loadSuperheroesUseCase: Load
 
     private fun fetchSuperheroes() {
         viewModelScope.launch {
-            loadSuperheroesUseCase.invoke().collect { result ->
-                when (result) {
-                    is Result.Success -> handleFetchSuccess(result.value)
-                    is Result.Error -> handleFetchError(result.failure)
-                    Result.Loading -> Log.i("TAGG", "Ok")
+            loadSuperheroesUseCase.invoke()
+                .catch { throwable -> handleFetchError(Failure.UnknownError(throwable.message ?: "")) }
+                .collect { result ->
+                    when (result) {
+                        is Result.Success -> handleFetchSuccess(result.value)
+                        is Result.Error -> handleFetchError(result.failure)
+                        Result.Loading -> Log.i("TAGG", "Loading Ok")
+                    }
                 }
-            }
         }
     }
 
@@ -44,3 +47,4 @@ class MainViewModel @Inject constructor(private val loadSuperheroesUseCase: Load
         _uiState.value = Result.Error(failure)
     }
 }
+

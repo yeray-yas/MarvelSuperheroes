@@ -43,13 +43,10 @@ class LaunchingFragment : Fragment() {
                 parentFragmentManager.commit {
                     replace<MasterFragment>(R.id.fcv_main_container)
                     setReorderingAllowed(true)
-                    //addToBackStack("principal")
                 }
             }, ANIMATION_DURATION
         )
 
-
-        // Inflate the layout for this fragment
         return binding.root
     }
 

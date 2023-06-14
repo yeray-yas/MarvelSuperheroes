@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.yerayyas.marvelsuperheroes.R
 import com.yerayyas.marvelsuperheroes.domain.model.Superhero
 import com.yerayyas.marvelsuperheroes.databinding.ViewSuperheroItemBinding
 import com.yerayyas.marvelsuperheroes.framework.utils.common.basicDiffUtil
@@ -46,12 +47,18 @@ class SuperheroAdapter(
 
         fun bind(superhero: Superhero) {
             binding.tvName.text = superhero.name
-
-            Glide
-                .with(binding.root.context)
-                .load("${superhero.thumbnail.path}.${superhero.thumbnail.extension}")
-                .into(binding.ivCover)
+            val imageUrl = "${superhero.thumbnail.path}.${superhero.thumbnail.extension}"
+            val context = binding.root.context
+            if (imageUrl.contains("image_not_available")) {
+                Glide
+                    .with(context)
+                    .load(R.drawable.marvel_image_not_found)
+                    .into(binding.ivCover)
+            } else {
+                Glide.with(context)
+                    .load(imageUrl)
+                    .into(binding.ivCover)
+            }
         }
-
     }
 }
