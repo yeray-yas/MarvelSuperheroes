@@ -1,52 +1,80 @@
 package com.yerayyas.marvelsuperheroes.framework.ui.main
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+
 import com.yerayyas.marvelsuperheroes.domain.model.Comics
 import com.yerayyas.marvelsuperheroes.domain.model.Superhero
 import com.yerayyas.marvelsuperheroes.domain.model.Thumbnail
 import com.yerayyas.marvelsuperheroes.domain.usecases.LoadSuperheroesUseCase
-import io.mockk.MockKAnnotations
-import io.mockk.coEvery
-import io.mockk.impl.annotations.RelaxedMockK
+import com.yerayyas.marvelsuperheroes.framework.states.Failure
+import com.yerayyas.marvelsuperheroes.framework.states.Result
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.setMain
-import org.junit.After
+import org.junit.Assert.assertEquals
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
+import org.mockito.Mock
+import org.mockito.Mockito.`when`
+import org.mockito.MockitoAnnotations
 
 @ExperimentalCoroutinesApi
 class MainViewModelTest {
 
-    @RelaxedMockK
-    private lateinit var loadSuperheroesUseCase: LoadSuperheroesUseCase
+    @Mock
+    private lateinit var mockLoadSuperheroesUseCase: LoadSuperheroesUseCase
 
-    private lateinit var mainViewModel: MainViewModel
-
-    @get:Rule
-    var rule: InstantTaskExecutorRule = InstantTaskExecutorRule()
+    private lateinit var viewModel: MainViewModel
 
     @Before
-    fun onBefore() {
-        MockKAnnotations.init(this)
-        mainViewModel = MainViewModel(loadSuperheroesUseCase)
-        Dispatchers.setMain(Dispatchers.Unconfined)
-
+    fun setup() {
+        Dispatchers.setMain(StandardTestDispatcher())
+        MockitoAnnotations.openMocks(this)
+        viewModel = MainViewModel(mockLoadSuperheroesUseCase)
     }
 
 
-    @After
-    fun onAfter(){
-        Dispatchers.resetMain()
+
+
+    @Test
+    fun `fetchSuperheroes should update uiState with error result`() = runBlockingTest {
+        // Arrange
+        val expectedError = Failure.NetworkError("Network error")
+        val expectedResult = Result.Error(expectedError)
+        val mockUiState = MutableStateFlow<Result<List<Superhero>, Failure>>(Result.Loading)
+        `when`(mockLoadSuperheroesUseCase.invoke()).thenReturn(mockUiState)
+
+        // Act
+        viewModel.fetchSuperheroes()
+        viewModel.handleFetchError(expectedError)
+
+        // Assert
+        val uiState = viewModel.uiState.first()
+        assertEquals(expectedResult, uiState)
     }
 
     @Test
-    fun `when viewmodel is created at first time, get all superheroes`() = runTest {
-        // Given
-        val expectedSuperheroes = listOf(
+    fun `fetchSuperheroes should update uiState with loading result`() = runBlockingTest {
+        // Arrange
+        val expectedLoadingResult = Result.Loading
+        val mockUiState = MutableStateFlow<Result<List<Superhero>, Failure>>(Result.Loading)
+        `when`(mockLoadSuperheroesUseCase.invoke()).thenReturn(mockUiState)
+
+        // Act
+        viewModel.fetchSuperheroes()
+
+        // Assert
+        val uiState = viewModel.uiState.first()
+        assertEquals(expectedLoadingResult, uiState)
+    }
+
+    @Test
+    fun `handleFetchSuccess should update uiState with success result`() {
+        // Arrange
+        val expectedSuperheroes =  listOf(
             Superhero(
                 comics = Comics(1), "superhero mix 1",
                 56, "SuperMan", thumbnail = Thumbnail("www.google.superman", "jpg")
@@ -60,13 +88,43 @@ class MainViewModelTest {
                 58, "Thor", thumbnail = Thumbnail("www.google.thor", "jpeg")
             )
         )
-        coEvery { loadSuperheroesUseCase.invoke() } returns expectedSuperheroes
+        val expectedResult = Result.Success(expectedSuperheroes)
 
-        // When
-        mainViewModel.fetchSuperheroes()
+        // Act
+        viewModel.handleFetchSuccess(expectedSuperheroes)
 
-        // Then
-        assert(mainViewModel.superheroes.value == expectedSuperheroes)
+        // Assert
+        val uiState = viewModel.uiState.value
+        assertEquals(expectedResult, uiState)
+    }
 
+    @Test
+    fun `handleFetchError should update uiState with error result`() {
+        // Arrange
+        val expectedError = Failure.NetworkError("Network error")
+        val expectedResult = Result.Error(expectedError)
+
+        // Act
+        viewModel.handleFetchError(expectedError)
+
+        // Assert
+        val uiState = viewModel.uiState.value
+        assertEquals(expectedResult, uiState)
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

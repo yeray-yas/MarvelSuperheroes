@@ -25,7 +25,7 @@ class MainViewModel @Inject constructor(private val loadSuperheroesUseCase: Load
         fetchSuperheroes()
     }
 
-    private fun fetchSuperheroes() {
+    internal fun fetchSuperheroes() {
         viewModelScope.launch {
             loadSuperheroesUseCase.invoke()
                 .catch { throwable -> handleFetchError(Failure.UnknownError(throwable.message ?: "")) }
@@ -39,11 +39,11 @@ class MainViewModel @Inject constructor(private val loadSuperheroesUseCase: Load
         }
     }
 
-    private fun handleFetchSuccess(superheroes: List<Superhero>) {
+    internal fun handleFetchSuccess(superheroes: List<Superhero>) {
         _uiState.value = Result.Success(superheroes)
     }
 
-    private fun handleFetchError(failure: Failure) {
+    internal fun handleFetchError(failure: Failure) {
         _uiState.value = Result.Error(failure)
     }
 }
