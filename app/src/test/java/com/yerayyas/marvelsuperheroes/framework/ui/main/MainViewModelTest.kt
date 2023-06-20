@@ -36,9 +36,6 @@ class MainViewModelTest {
         viewModel = MainViewModel(mockLoadSuperheroesUseCase)
     }
 
-
-
-
     @Test
     fun `fetchSuperheroes should update uiState with error result`() = runBlockingTest {
         // Arrange
@@ -112,19 +109,3 @@ class MainViewModelTest {
         assertEquals(expectedResult, uiState)
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
