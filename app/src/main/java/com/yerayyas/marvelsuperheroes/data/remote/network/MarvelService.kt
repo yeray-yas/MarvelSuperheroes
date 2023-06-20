@@ -1,6 +1,6 @@
 package com.yerayyas.marvelsuperheroes.data.remote.network
 
-import com.yerayyas.marvelsuperheroes.domain.model.Marvel
+import com.yerayyas.marvelsuperheroes.data.model.Marvel
 import retrofit2.http.GET
 import retrofit2.http.Query
 

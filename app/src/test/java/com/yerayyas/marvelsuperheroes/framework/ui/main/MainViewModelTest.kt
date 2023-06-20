@@ -1,9 +1,9 @@
 package com.yerayyas.marvelsuperheroes.framework.ui.main
 
 
-import com.yerayyas.marvelsuperheroes.domain.model.Comics
-import com.yerayyas.marvelsuperheroes.domain.model.Superhero
-import com.yerayyas.marvelsuperheroes.domain.model.Thumbnail
+import com.yerayyas.marvelsuperheroes.data.model.Comics
+import com.yerayyas.marvelsuperheroes.data.model.Superhero
+import com.yerayyas.marvelsuperheroes.data.model.Thumbnail
 import com.yerayyas.marvelsuperheroes.domain.usecases.LoadSuperheroesUseCase
 import com.yerayyas.marvelsuperheroes.framework.states.Failure
 import com.yerayyas.marvelsuperheroes.framework.states.Result

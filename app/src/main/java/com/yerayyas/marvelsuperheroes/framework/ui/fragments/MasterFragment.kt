@@ -16,7 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.yerayyas.marvelsuperheroes.R
 import com.yerayyas.marvelsuperheroes.databinding.FragmentMasterBinding
-import com.yerayyas.marvelsuperheroes.domain.model.Superhero
+import com.yerayyas.marvelsuperheroes.data.model.Superhero
 import com.yerayyas.marvelsuperheroes.framework.states.Failure
 import com.yerayyas.marvelsuperheroes.framework.ui.main.MainViewModel
 import com.yerayyas.marvelsuperheroes.framework.ui.main.SuperheroAdapter

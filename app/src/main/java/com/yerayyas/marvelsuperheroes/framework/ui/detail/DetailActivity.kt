@@ -6,7 +6,7 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.yerayyas.marvelsuperheroes.R
 import com.yerayyas.marvelsuperheroes.framework.utils.common.inline_functions.parcelable
-import com.yerayyas.marvelsuperheroes.domain.model.Superhero
+import com.yerayyas.marvelsuperheroes.data.model.Superhero
 import com.yerayyas.marvelsuperheroes.databinding.ActivityDetailBinding
 
 class DetailActivity : AppCompatActivity() {

@@ -1,7 +1,7 @@
 package com.yerayyas.marvelsuperheroes.data.remote.dataSources
 
 import com.yerayyas.marvelsuperheroes.BuildConfig
-import com.yerayyas.marvelsuperheroes.domain.model.Superhero
+import com.yerayyas.marvelsuperheroes.data.model.Superhero
 import com.yerayyas.marvelsuperheroes.data.remote.network.SuperheroDbClient
 
 class ServerSuperheroDataSource : RemoteDataSource {

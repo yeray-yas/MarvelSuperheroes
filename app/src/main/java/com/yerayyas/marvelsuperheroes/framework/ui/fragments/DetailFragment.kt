@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.yerayyas.marvelsuperheroes.R
 import com.yerayyas.marvelsuperheroes.databinding.FragmentDetailBinding
-import com.yerayyas.marvelsuperheroes.domain.model.Superhero
+import com.yerayyas.marvelsuperheroes.data.model.Superhero
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

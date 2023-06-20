@@ -1,7 +1,7 @@
 package com.yerayyas.marvelsuperheroes.domain.usecases
 
-import com.yerayyas.marvelsuperheroes.domain.model.Superhero
-import com.yerayyas.marvelsuperheroes.data.repositories.SuperheroRepository
+import com.yerayyas.marvelsuperheroes.data.model.Superhero
+import com.yerayyas.marvelsuperheroes.data.repository.SuperheroRepository
 import com.yerayyas.marvelsuperheroes.framework.states.Failure
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
