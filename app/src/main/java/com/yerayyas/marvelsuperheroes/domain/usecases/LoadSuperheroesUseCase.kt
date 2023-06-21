@@ -1,7 +1,9 @@
 package com.yerayyas.marvelsuperheroes.domain.usecases
 
+import com.yerayyas.marvelsuperheroes.data.local.toDatabase
 import com.yerayyas.marvelsuperheroes.domain.model.Superhero
 import com.yerayyas.marvelsuperheroes.data.repositories.SuperheroRepository
+import com.yerayyas.marvelsuperheroes.domain.model.Superheroes
 import com.yerayyas.marvelsuperheroes.framework.states.Failure
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -14,15 +16,22 @@ import java.io.IOException
 
 class LoadSuperheroesUseCase @Inject constructor(private val repository: SuperheroRepository) {
 
-    suspend fun invoke(): Flow<Result<List<Superhero>, Failure>> = flow {
+    suspend fun invoke(): Flow<Result<List<Superheroes>, Failure>> = flow {
         emit(Result.Loading)
 
         try {
-            val superheroes = repository.getSuperheroes()
+            val superheroes = repository.getSuperheroesFromApi()
+            if (superheroes.isNotEmpty()) {
+                repository.deleteSuperheroes()
+                repository.insertSuperheroes(superheroes.map { it.toDatabase() })
+                superheroes
+            } else {
+                repository.getSuperheroesFromDatabase()
+            }
             emit(Result.Success(superheroes))
-        } catch (networkException:IOException) {
+        } catch (networkException: IOException) {
             emit(Result.Error(Failure.NetworkError(networkException.message)))
-        } catch (serverException:HttpException) {
+        } catch (serverException: HttpException) {
             emit(Result.Error(Failure.ServerError(serverException.code(), serverException.message)))
         } catch (otherException: Exception) {
             emit(Result.Error(Failure.UnknownError(otherException.message)))
