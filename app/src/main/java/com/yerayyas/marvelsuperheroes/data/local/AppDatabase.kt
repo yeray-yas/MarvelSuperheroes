@@ -9,7 +9,7 @@ import androidx.room.TypeConverters
     version = 1,
     exportSchema = false
 )
-@TypeConverters(ComicsConverter::class)
+@TypeConverters(ComicsConverter::class, ThumbnailConverter::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun superheroDao(): SuperheroDao
 }

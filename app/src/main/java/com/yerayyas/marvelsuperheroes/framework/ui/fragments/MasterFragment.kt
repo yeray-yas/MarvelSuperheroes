@@ -17,6 +17,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.yerayyas.marvelsuperheroes.R
 import com.yerayyas.marvelsuperheroes.databinding.FragmentMasterBinding
 import com.yerayyas.marvelsuperheroes.domain.model.Superhero
+import com.yerayyas.marvelsuperheroes.domain.model.Superheroes
 import com.yerayyas.marvelsuperheroes.framework.states.Failure
 import com.yerayyas.marvelsuperheroes.framework.ui.main.MainViewModel
 import com.yerayyas.marvelsuperheroes.framework.ui.main.SuperheroAdapter
@@ -72,7 +73,7 @@ class MasterFragment : Fragment() {
         }
     }
 
-    private fun handleResult(result: Result<List<Superhero>, Failure>) {
+    private fun handleResult(result: Result<List<Superheroes>, Failure>) {
         with(binding.viewLoading) {
             isVisible = result is Result.Loading
 
@@ -92,7 +93,7 @@ class MasterFragment : Fragment() {
         Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 
-    private fun navigateTo(superhero: Superhero) {
+    private fun navigateTo(superhero: Superheroes) {
         val bundle = Bundle().apply {
             putParcelable("superhero", superhero)
         }

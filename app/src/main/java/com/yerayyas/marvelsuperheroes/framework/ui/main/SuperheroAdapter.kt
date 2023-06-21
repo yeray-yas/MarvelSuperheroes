@@ -7,15 +7,16 @@ import com.bumptech.glide.Glide
 import com.yerayyas.marvelsuperheroes.R
 import com.yerayyas.marvelsuperheroes.domain.model.Superhero
 import com.yerayyas.marvelsuperheroes.databinding.ViewSuperheroItemBinding
+import com.yerayyas.marvelsuperheroes.domain.model.Superheroes
 import com.yerayyas.marvelsuperheroes.framework.utils.common.basicDiffUtil
 
 class SuperheroAdapter(
 
-    private val superheroClickedListener: (Superhero) -> Unit
+    private val superheroClickedListener: (Superheroes) -> Unit
 ) :
     RecyclerView.Adapter<SuperheroAdapter.ViewHolder>() {
 
-    var superheroes: List<Superhero> by basicDiffUtil(
+    var superheroes: List<Superheroes> by basicDiffUtil(
         areItemsTheSame = { old, new -> old.id == new.id }
     )
 
@@ -45,7 +46,7 @@ class SuperheroAdapter(
     class ViewHolder(private val binding: ViewSuperheroItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(superhero: Superhero) {
+        fun bind(superhero: Superheroes) {
             binding.tvName.text = superhero.name
             val imageUrl = "${superhero.thumbnail.path}.${superhero.thumbnail.extension}"
             val context = binding.root.context

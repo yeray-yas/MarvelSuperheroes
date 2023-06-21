@@ -1,5 +1,7 @@
 package com.yerayyas.marvelsuperheroes.di.module
 
+import com.yerayyas.marvelsuperheroes.data.local.AppDatabase
+import com.yerayyas.marvelsuperheroes.data.local.SuperheroDao
 import com.yerayyas.marvelsuperheroes.data.remote.dataSources.RemoteDataSource
 import com.yerayyas.marvelsuperheroes.data.repositories.SuperheroRepository
 import dagger.Module
@@ -12,7 +14,10 @@ import dagger.hilt.components.SingletonComponent
 class DataModule {
 
     @Provides
-    fun provideSuperheroRepository(remoteDataSource: RemoteDataSource):SuperheroRepository{
-        return SuperheroRepository(remoteDataSource)
+    fun provideSuperheroRepository(remoteDataSource: RemoteDataSource,
+                                   superheroDao: SuperheroDao
+    ):SuperheroRepository{
+        return SuperheroRepository(remoteDataSource, superheroDao)
     }
+
 }

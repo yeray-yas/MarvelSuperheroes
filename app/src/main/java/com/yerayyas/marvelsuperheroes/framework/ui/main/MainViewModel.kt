@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yerayyas.marvelsuperheroes.domain.model.Superhero
+import com.yerayyas.marvelsuperheroes.domain.model.Superheroes
 import com.yerayyas.marvelsuperheroes.domain.usecases.LoadSuperheroesUseCase
 import com.yerayyas.marvelsuperheroes.framework.states.Failure
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,8 +19,8 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(private val loadSuperheroesUseCase: LoadSuperheroesUseCase) :
     ViewModel() {
 
-    private val _uiState = MutableStateFlow<Result<List<Superhero>, Failure>>(Result.Loading)
-    val uiState: StateFlow<Result<List<Superhero>, Failure>> = _uiState
+    private val _uiState = MutableStateFlow<Result<List<Superheroes>, Failure>>(Result.Loading)
+    val uiState: StateFlow<Result<List<Superheroes>, Failure>> = _uiState
 
     init {
         fetchSuperheroes()
@@ -39,7 +40,7 @@ class MainViewModel @Inject constructor(private val loadSuperheroesUseCase: Load
         }
     }
 
-    internal fun handleFetchSuccess(superheroes: List<Superhero>) {
+    internal fun handleFetchSuccess(superheroes: List<Superheroes>) {
         _uiState.value = Result.Success(superheroes)
     }
 
