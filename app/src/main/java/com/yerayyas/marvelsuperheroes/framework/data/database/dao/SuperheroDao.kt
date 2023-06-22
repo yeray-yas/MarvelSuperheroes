@@ -15,5 +15,6 @@ interface SuperheroDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(superheroes:List<SuperheroEntity>)
 
-
+@Query("DELETE FROM superhero_table")
+suspend fun deleteSuperheroes()
 }

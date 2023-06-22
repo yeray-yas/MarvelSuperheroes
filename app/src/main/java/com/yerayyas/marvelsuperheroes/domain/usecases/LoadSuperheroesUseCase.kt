@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 import com.yerayyas.marvelsuperheroes.domain.states.Result
+import com.yerayyas.marvelsuperheroes.framework.data.database.entities.toDatabase
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -21,7 +22,9 @@ class LoadSuperheroesUseCase @Inject constructor(private val repository: Superhe
         try {
             val superheroes = repository.getSuperheroesFromApi()
             if (superheroes.isNotEmpty()){
-                //
+                repository.clearSuperheroes()
+                repository.insertSuperheroes(superheroes.map { it.toDatabase() })
+                superheroes
             }else{
                 repository.getSuperheroesFromDatabase()
             }

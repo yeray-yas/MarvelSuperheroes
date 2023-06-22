@@ -5,6 +5,7 @@ import com.yerayyas.marvelsuperheroes.data.model.Superhero
 import com.yerayyas.marvelsuperheroes.domain.model.Super
 import com.yerayyas.marvelsuperheroes.domain.model.toDomain
 import com.yerayyas.marvelsuperheroes.framework.data.database.dao.SuperheroDao
+import com.yerayyas.marvelsuperheroes.framework.data.database.entities.SuperheroEntity
 import javax.inject.Inject
 
 class SuperheroRepository @Inject constructor(
@@ -20,5 +21,13 @@ class SuperheroRepository @Inject constructor(
     suspend fun getSuperheroesFromDatabase(): List<Super>{
         val response = superheroDao.getAllSuperheroes()
         return response.map { it.toDomain() }
+    }
+
+    suspend fun insertSuperheroes(superheroes:List<SuperheroEntity>) {
+        superheroDao.insertAll(superheroes)
+    }
+
+    suspend fun clearSuperheroes() {
+        superheroDao.deleteSuperheroes()
     }
 }
