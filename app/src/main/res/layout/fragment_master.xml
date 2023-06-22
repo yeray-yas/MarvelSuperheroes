@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".framework.ui.main.MainActivity">
+    tools:context=".presentation.ui.main.MainActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".framework.ui.fragments.MasterFragment">
+        tools:context=".presentation.ui.fragments.MasterFragment">
 
 
         <androidx.recyclerview.widget.RecyclerView
