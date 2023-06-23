@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.yerayyas.marvelsuperheroes.R
 import com.yerayyas.marvelsuperheroes.databinding.FragmentDetailBinding
 import com.yerayyas.marvelsuperheroes.data.model.Superhero
+import com.yerayyas.marvelsuperheroes.domain.model.Super
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,13 +28,13 @@ class DetailFragment : Fragment() {
     ): View {
         binding = FragmentDetailBinding.inflate(inflater, container, false)
 
-        val superhero: Superhero? = arguments?.getParcelable("superhero")
+        val superhero: Super? = arguments?.getParcelable("superhero")
         superhero?.let { showSuperheroDetails(it) }
 
         return binding.root
     }
 
-    private fun showSuperheroDetails(superhero: Superhero) {
+    private fun showSuperheroDetails(superhero: Super) {
         binding.toolbar.title = superhero.name
 
         val imageUrl = "${superhero.thumbnail.path}.${superhero.thumbnail.extension}"
@@ -58,7 +59,7 @@ class DetailFragment : Fragment() {
         bindDetailInfo(binding.tvDetailInfo, superhero)
     }
 
-    private fun bindDetailInfo(tvDetailInfo: TextView, superhero: Superhero) {
+    private fun bindDetailInfo(tvDetailInfo: TextView, superhero: Super) {
         tvDetailInfo.text = superhero.comics.available.toString()
     }
 }

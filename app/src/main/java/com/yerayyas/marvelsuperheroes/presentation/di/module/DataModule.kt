@@ -13,11 +13,6 @@ import dagger.hilt.components.SingletonComponent
 class DataModule {
 
     @Provides
-    fun provideSuperheroDao(db: SuperheroDatabase): SuperheroDao {
-        return db.getSuperheroDao()
-    }
-
-    @Provides
     fun provideSuperheroRepository(remoteDataSource: RemoteDataSource, superheroDao: SuperheroDao): SuperheroRepository {
         return SuperheroRepository(remoteDataSource, superheroDao)
     }

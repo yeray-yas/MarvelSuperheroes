@@ -40,7 +40,7 @@ class MainViewModel @Inject constructor(private val loadSuperheroesUseCase: Load
         }
     }
 
-    internal fun handleFetchSuccess(superheroes: List<Superhero>) {
+    internal fun handleFetchSuccess(superheroes: List<Super>) {
         _uiState.value = Result.Success(superheroes)
     }
 
