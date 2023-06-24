@@ -29,12 +29,16 @@ class LoadSuperheroesUseCase @Inject constructor(private val repository: Superhe
                 repository.insertSuperheroes(superheroes.map { it.toDatabase() })
                 emit(Result.Success(superheroes))
                 Log.i("YDS", "Datos cargados desde la API")
+            } else {
+                superheroes = repository.getSuperheroesFromDatabase()
+                emit(Result.Success(superheroes))
+                Log.i("YDS", "Datos cargados desde la base de datos")
             }
         } catch (networkException: IOException) {
-            emit(Result.Error(Failure.NetworkError(networkException.message)))
             val superheroes = repository.getSuperheroesFromDatabase()
             emit(Result.Success(superheroes))
-            Log.i("YDS", "Datos cargados desde la base de datos")
+            emit(Result.Error(Failure.NetworkError(networkException.message)))
+            Log.i("YDS", "Error de red. Datos cargados desde la base de datos")
         } catch (serverException: HttpException) {
             emit(Result.Error(Failure.ServerError(serverException.code(), serverException.message)))
         } catch (otherException: Exception) {
@@ -42,4 +46,5 @@ class LoadSuperheroesUseCase @Inject constructor(private val repository: Superhe
         }
     }.flowOn(Dispatchers.IO)
 }
+
 
