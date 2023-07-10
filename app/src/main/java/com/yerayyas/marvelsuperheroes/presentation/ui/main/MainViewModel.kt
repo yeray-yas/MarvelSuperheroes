@@ -22,6 +22,10 @@ class MainViewModel @Inject constructor(private val loadSuperheroesUseCase: Load
     private val _uiState = MutableStateFlow<Result<List<Super>, Failure>>(Result.Loading)
     val uiState: StateFlow<Result<List<Super>, Failure>> = _uiState
 
+    private val _superheroesState = MutableStateFlow<List<Super>>(emptyList())
+    val superheroesState: StateFlow<List<Super>> = _superheroesState
+
+
     init {
         fetchSuperheroes()
     }
@@ -29,7 +33,13 @@ class MainViewModel @Inject constructor(private val loadSuperheroesUseCase: Load
     internal fun fetchSuperheroes() {
         viewModelScope.launch {
             loadSuperheroesUseCase.invoke()
-                .catch { throwable -> handleFetchError(Failure.UnknownError(throwable.message ?: "")) }
+                .catch { throwable ->
+                    handleFetchError(
+                        Failure.UnknownError(
+                            throwable.message ?: ""
+                        )
+                    )
+                }
                 .collect { result ->
                     when (result) {
                         is Result.Success -> handleFetchSuccess(result.value)
@@ -41,6 +51,7 @@ class MainViewModel @Inject constructor(private val loadSuperheroesUseCase: Load
     }
 
     internal fun handleFetchSuccess(superheroes: List<Super>) {
+        _superheroesState.value = superheroes
         _uiState.value = Result.Success(superheroes)
     }
 

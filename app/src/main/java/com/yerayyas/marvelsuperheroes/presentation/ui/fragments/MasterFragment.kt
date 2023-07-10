@@ -66,8 +66,8 @@ class MasterFragment : Fragment() {
     private fun observeUIStates() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.uiState.collect { result ->
-                    handleResult(result)
+                viewModel.superheroesState.collect { superheroes ->
+                    superheroesAdapter.submitList(superheroes)
                 }
             }
         }

@@ -2,21 +2,24 @@ package com.yerayyas.marvelsuperheroes.presentation.ui.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.yerayyas.marvelsuperheroes.R
 import com.yerayyas.marvelsuperheroes.databinding.ViewSuperheroItemBinding
 import com.yerayyas.marvelsuperheroes.domain.model.Super
+import com.yerayyas.marvelsuperheroes.framework.utils.common.MainDiffCallback
 import com.yerayyas.marvelsuperheroes.framework.utils.common.basicDiffUtil
 
 class MainAdapter(
 
     private val superheroClickedListener: (Super) -> Unit
 ) :
-    RecyclerView.Adapter<MainAdapter.ViewHolder>() {
+    ListAdapter<Super, MainAdapter.ViewHolder>(MainDiffCallback()) {
 
     var superheroes: List<Super> by basicDiffUtil(
-        areItemsTheSame = { old, new -> old.id == new.id }
+        areItemsTheSame = { old, new -> old == new },
+        areContentsTheSame = { old, new -> old == new }
     )
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
