@@ -3,16 +3,15 @@ package com.yerayyas.marvelsuperheroes.presentation.ui.main
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.yerayyas.marvelsuperheroes.data.model.Superhero
 import com.yerayyas.marvelsuperheroes.domain.model.Super
-import com.yerayyas.marvelsuperheroes.domain.usecases.LoadSuperheroesUseCase
 import com.yerayyas.marvelsuperheroes.domain.states.Failure
+import com.yerayyas.marvelsuperheroes.domain.states.Result
+import com.yerayyas.marvelsuperheroes.domain.usecases.LoadSuperheroesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
-import com.yerayyas.marvelsuperheroes.domain.states.Result
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,6 +20,7 @@ class MainViewModel @Inject constructor(private val loadSuperheroesUseCase: Load
 
     private val _uiState = MutableStateFlow<Result<List<Super>, Failure>>(Result.Loading)
     val uiState: StateFlow<Result<List<Super>, Failure>> = _uiState
+
 
     init {
         fetchSuperheroes()
@@ -47,5 +47,6 @@ class MainViewModel @Inject constructor(private val loadSuperheroesUseCase: Load
     internal fun handleFetchError(failure: Failure) {
         _uiState.value = Result.Error(failure)
     }
+
 }
 

@@ -8,6 +8,8 @@ import com.yerayyas.marvelsuperheroes.R
 import com.yerayyas.marvelsuperheroes.databinding.ActivityLaunchingBinding
 import com.yerayyas.marvelsuperheroes.presentation.ui.fragments.LaunchingFragment
 import dagger.hilt.android.AndroidEntryPoint
+import android.content.res.Configuration
+
 
 
 @AndroidEntryPoint
@@ -18,11 +20,18 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityLaunchingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        if (savedInstanceState== null){
-            supportFragmentManager.commit {
-                setReorderingAllowed(true)
-                add<LaunchingFragment>(R.id.fcv_main_container)
+        if (savedInstanceState == null) {
+            if (supportFragmentManager.findFragmentById(R.id.fcv_main_container) == null) {
+                supportFragmentManager.commit {
+                    add<LaunchingFragment>(R.id.fcv_main_container)
+                }
             }
         }
     }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+    }
+
+
 }

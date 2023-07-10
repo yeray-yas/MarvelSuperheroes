@@ -1,26 +1,23 @@
 package com.yerayyas.marvelsuperheroes.presentation.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.yerayyas.marvelsuperheroes.domain.states.Result
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.yerayyas.marvelsuperheroes.R
 import com.yerayyas.marvelsuperheroes.databinding.FragmentMasterBinding
-import com.yerayyas.marvelsuperheroes.data.model.Superhero
 import com.yerayyas.marvelsuperheroes.domain.model.Super
 import com.yerayyas.marvelsuperheroes.domain.states.Failure
-import com.yerayyas.marvelsuperheroes.presentation.ui.main.MainViewModel
+import com.yerayyas.marvelsuperheroes.domain.states.Result
 import com.yerayyas.marvelsuperheroes.presentation.ui.main.MainAdapter
+import com.yerayyas.marvelsuperheroes.presentation.ui.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -28,8 +25,9 @@ import kotlinx.coroutines.launch
 class MasterFragment : Fragment() {
 
     private lateinit var binding: FragmentMasterBinding
-    private val viewModel by viewModels<MainViewModel>()
+    private val viewModel by activityViewModels<MainViewModel>()
     private val superheroesAdapter by lazy { MainAdapter(::navigateTo) }
+    private var dataList: List<Super> = emptyList()
 
     private val onBackPressedCallback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
@@ -55,8 +53,19 @@ class MasterFragment : Fragment() {
     ): View {
         binding = FragmentMasterBinding.inflate(inflater, container, false)
         setupRecyclerView()
-        observeUIStates()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        observeUIStates()
+
+        if (savedInstanceState != null && dataList.isEmpty()) {
+            savedInstanceState.getParcelableArrayList<Super>("dataList")?.let { savedDataList ->
+                dataList = savedDataList
+                superheroesAdapter.superheroes = dataList
+            }
+        }
     }
 
     private fun setupRecyclerView() {
@@ -65,10 +74,8 @@ class MasterFragment : Fragment() {
 
     private fun observeUIStates() {
         viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.uiState.collect { result ->
-                    handleResult(result)
-                }
+            viewModel.uiState.collect { result ->
+                handleResult(result)
             }
         }
     }
@@ -78,10 +85,13 @@ class MasterFragment : Fragment() {
             isVisible = result is Result.Loading
 
             if (result is Result.Success) {
-                superheroesAdapter.superheroes = result.value
+                dataList = result.value
+                superheroesAdapter.superheroes = dataList
             } else if (result is Result.Error) {
                 when (val failure = result.failure) {
-                    is Failure.NetworkError -> showToast("Network error. Verify your internet connection.")
+                    is Failure.NetworkError -> {
+                        showToast("Network error. Verify your internet connection.")
+                    }
                     is Failure.ServerError -> showToast("Server error. Code (${failure.code}): ${failure.message}")
                     is Failure.UnknownError -> showToast("Unknown error has occurred. ${failure.message}")
                 }
@@ -104,13 +114,22 @@ class MasterFragment : Fragment() {
 
         parentFragmentManager.commit {
             setCustomAnimations(R.anim.slide_left_enter, R.anim.slide_left_exit)
-
             replace(R.id.fcv_main_container, detailFragment)
             setReorderingAllowed(true)
             addToBackStack(null)
         }
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        if (dataList.isNotEmpty()) {
+            outState.putParcelableArrayList("dataList", ArrayList(dataList))
+        }
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        // No se necesita implementación aquí
+    }
 }
-
-
 
