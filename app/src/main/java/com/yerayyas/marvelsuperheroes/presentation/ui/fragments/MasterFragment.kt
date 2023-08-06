@@ -10,6 +10,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.yerayyas.marvelsuperheroes.R
 import com.yerayyas.marvelsuperheroes.databinding.FragmentMasterBinding
@@ -25,9 +26,10 @@ import kotlinx.coroutines.launch
 class MasterFragment : Fragment() {
 
     private lateinit var binding: FragmentMasterBinding
-    private val viewModel by activityViewModels<MainViewModel>()
+    private val viewModel by viewModels<MainViewModel>()
     private val superheroesAdapter by lazy { MainAdapter(::navigateTo) }
     private var dataList: List<Super> = emptyList()
+    private var isDataLoaded: Boolean = false
 
     private val onBackPressedCallback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
@@ -52,17 +54,18 @@ class MasterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentMasterBinding.inflate(inflater, container, false)
-        setupRecyclerView()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupRecyclerView()
         observeUIStates()
 
         if (savedInstanceState != null && dataList.isEmpty()) {
             savedInstanceState.getParcelableArrayList<Super>("dataList")?.let { savedDataList ->
                 dataList = savedDataList
+                isDataLoaded = true
                 superheroesAdapter.superheroes = dataList
             }
         }
@@ -75,9 +78,22 @@ class MasterFragment : Fragment() {
     private fun observeUIStates() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.uiState.collect { result ->
-                handleResult(result)
+                when (result) {
+                    is Result.Loading -> {
+                        // Mostrar carga o progreso
+                    }
+                    is Result.Success -> {
+                        val superheroes = result.value
+                        // Actualizar el adaptador con los datos
+                    }
+                    is Result.Error -> {
+                        val failure = result.failure
+                        // Mostrar el error en la UI
+                    }
+                }
             }
         }
+
     }
 
     private fun handleResult(result: Result<List<Super>, Failure>) {
@@ -86,14 +102,23 @@ class MasterFragment : Fragment() {
 
             if (result is Result.Success) {
                 dataList = result.value
+                isDataLoaded = true
                 superheroesAdapter.superheroes = dataList
+                superheroesAdapter.notifyDataSetChanged()
             } else if (result is Result.Error) {
                 when (val failure = result.failure) {
                     is Failure.NetworkError -> {
                         showToast("Network error. Verify your internet connection.")
+                        isDataLoaded = false
                     }
-                    is Failure.ServerError -> showToast("Server error. Code (${failure.code}): ${failure.message}")
-                    is Failure.UnknownError -> showToast("Unknown error has occurred. ${failure.message}")
+                    is Failure.ServerError -> {
+                        showToast("Server error. Code (${failure.code}): ${failure.message}")
+                        isDataLoaded = false
+                    }
+                    is Failure.UnknownError -> {
+                        showToast("Unknown error has occurred. ${failure.message}")
+                        isDataLoaded = false
+                    }
                 }
             }
         }
@@ -125,11 +150,6 @@ class MasterFragment : Fragment() {
         if (dataList.isNotEmpty()) {
             outState.putParcelableArrayList("dataList", ArrayList(dataList))
         }
-    }
-
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        super.onViewStateRestored(savedInstanceState)
-        // No se necesita implementación aquí
     }
 }
 

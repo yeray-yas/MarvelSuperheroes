@@ -10,6 +10,7 @@ import com.yerayyas.marvelsuperheroes.domain.usecases.LoadSuperheroesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,34 +20,56 @@ class MainViewModel @Inject constructor(private val loadSuperheroesUseCase: Load
     ViewModel() {
 
     private val _uiState = MutableStateFlow<Result<List<Super>, Failure>>(Result.Loading)
-    val uiState: StateFlow<Result<List<Super>, Failure>> = _uiState
+    val uiState: StateFlow<Result<List<Super>, Failure>> get() = _uiState.asStateFlow()
 
+    private var dataLoaded = false
 
     init {
         fetchSuperheroes()
     }
 
-    internal fun fetchSuperheroes() {
+    fun fetchSuperheroes() {
         viewModelScope.launch {
-            loadSuperheroesUseCase.invoke()
-                .catch { throwable -> handleFetchError(Failure.UnknownError(throwable.message ?: "")) }
-                .collect { result ->
-                    when (result) {
-                        is Result.Success -> handleFetchSuccess(result.value)
-                        is Result.Error -> handleFetchError(result.failure)
-                        Result.Loading -> Log.i("TAGG", "Loading Ok")
-                    }
+            _uiState.value = Result.Loading
+
+            try {
+                val result = loadSuperheroesUseCase.invoke()
+                if (result is Result.Success) {
+                    dataLoaded = true
+                    _uiState.value = result
+                } else {
+                    _uiState.value = Result.Error(result.failure)
                 }
+            } catch (e: Exception) {
+                _uiState.value = Result.Error(Failure.UnknownError(e.message))
+            }
+        }
+    }
+    fun fetchSuperheroes() {
+        viewModelScope.launch {
+            _uiState.value = Result.Loading
+
+            try {
+                val result = loadSuperheroesUseCase.invoke()
+                when (result) {
+                    is Result.Success -> {
+                        dataLoaded = true
+                        _uiState.value = result
+                    }
+                    is Result.Error -> _uiState.value = result
+                }
+            } catch (e: Exception) {
+                _uiState.value = Result.Error(Failure.UnknownError(e.message))
+            }
         }
     }
 
-    internal fun handleFetchSuccess(superheroes: List<Super>) {
-        _uiState.value = Result.Success(superheroes)
-    }
 
-    internal fun handleFetchError(failure: Failure) {
-        _uiState.value = Result.Error(failure)
-    }
 
+
+    fun refreshData() {
+        if (!dataLoaded) {
+            fetchSuperheroes()
+        }
+    }
 }
-
